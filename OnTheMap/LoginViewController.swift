@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - IB elements
     
@@ -27,7 +27,7 @@ class LoginViewController: UIViewController {
     @IBAction func attempToLogin(sender: AnyObject) {
         myActivityIndicator.startAnimating()
 
-        //udacityClient.loginToUdacity(usernameTextField.text!, password: passwordTextField.text!) {
+        udacityClient.loginToUdacity(usernameTextField.text!, password: passwordTextField.text!) {
             (success, error) -> Void in
             self.stopAnimating()
             if success == true {
@@ -52,10 +52,22 @@ class LoginViewController: UIViewController {
     }
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        usernameTextField.delegate = self
+        passwordTextField.delegate = self
         // Increase the size of Spinner
         myActivityIndicator.transform = CGAffineTransformMakeScale(5, 5)
         subscribeToKeyboardShowNotifications()
         subscribeToKeyboardHideNotifications()
+    }
+    
+    
+    // MARK: - UITextField Delegate methods
+    
+    // Return button on soft keyboard
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
     
 }
