@@ -17,7 +17,7 @@ class UdacityLoginClient {
     var uniqueKey: String = ""
     var logAgain: String = "\nPlease Login Again"
     var thisStudentInformation: StudentInformation = StudentInformation()
-    
+    var model = Model.sharedInstance()
     
     // MARK: Functions
     
@@ -154,7 +154,7 @@ class UdacityLoginClient {
         
         // GUARD: Did we get successful 2XX response?
         guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
-            sendError("Your request returned a status code other than 2xx \((response as? NSHTTPURLResponse)?.statusCode)\(logAgain)")
+            sendError("There was an error logging in\(logAgain)")
             return
         }
         

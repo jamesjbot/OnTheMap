@@ -8,17 +8,36 @@
 
 import Foundation
 
+class Model{
+
+    var students: [StudentInformation] = [StudentInformation]()
+    var thisStudent: StudentInformation = StudentInformation()
+    
+    // MARK: - Singleton Implementation
+    
+    private init(){}
+    
+    class func sharedInstance() -> Model {
+        struct Singleton {
+            static var sharedInstance = Model()
+        }
+        return Singleton.sharedInstance
+    }
+    
+
+}
+
 struct StudentInformation {
-    var createdAt: String!// = "2016-04-26T00:04:35.930Z";
-    var firstName: String!// = Steven;
-    var lastName: String!// = Xu;
-    var latitude: String!// = "43.4677963";
-    var longitude: String!// = "-80.54235009999999";
-    var mapString: String!// = "university of Waterloo ";
-    var mediaURL: String!// = "https://sxu.ca";
-    var objectId: String!// = Hjb7hYIaEm;
-    var uniqueKey: String!// = 643038755;
-    var updatedAt: String!// = "2016-04-26T00:04:35.930Z";
+    var createdAt: String!
+    var firstName: String!
+    var lastName: String!
+    var latitude: String!
+    var longitude: String!
+    var mapString: String!
+    var mediaURL: String!
+    var objectId: String!
+    var uniqueKey: String!
+    var updatedAt: String!
     
     
     init( id: [ String: AnyObject ]){

@@ -11,7 +11,7 @@ import UIKit
 import MapKit
 
 
-class SubmitViewController: UIViewController, MKMapViewDelegate {
+class SubmitViewController: UIViewController, MKMapViewDelegate, UITextFieldDelegate {
     
     // MARK: - Variables
     
@@ -69,6 +69,7 @@ class SubmitViewController: UIViewController, MKMapViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.linkTextField.delegate = self
         // Increase the size of Spinner
         myActivityIndicator.transform = CGAffineTransformMakeScale(5, 5)
         let annotation = MKPointAnnotation()
@@ -95,7 +96,7 @@ class SubmitViewController: UIViewController, MKMapViewDelegate {
     }
     
     
-    // #MARK: - Mapview Delegate method
+    // MARK: - Mapview Delegate method
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         let reuseId = "pin"
         var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
@@ -111,6 +112,12 @@ class SubmitViewController: UIViewController, MKMapViewDelegate {
         return pinView
     }
     
+    // MARK: - UITextField Delegate methods
     
+    // Return button on soft keyboard
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
     
 }

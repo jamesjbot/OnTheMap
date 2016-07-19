@@ -20,7 +20,10 @@ extension ParseClient{
 
     struct Method{
         static let StudentLocations: String = "/StudentLocation"
+    }
     
+    struct MethodParameters {
+        static let Limit100: String = "Limit=100"
     }
 
     struct Keys{

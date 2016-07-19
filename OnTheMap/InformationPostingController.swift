@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class InformationPostingController:UIViewController {
+class InformationPostingController: UIViewController , UITextViewDelegate {
     
     // MARK: - Variables
     
@@ -43,6 +43,8 @@ class InformationPostingController:UIViewController {
     // MARK: - Functions
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        self.locationString.delegate = self
         // Increase the size of Spinner
         myActivityIndicator.transform = CGAffineTransformMakeScale(5, 5)
     }
@@ -79,5 +81,14 @@ class InformationPostingController:UIViewController {
             self.presentViewController(alertWindow, animated: true, completion: nil)
         })
     }
-
+    
+    // MARK: UITextViewDelegate methods
+    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+        if (text == "\n") { //new line
+            textView.resignFirstResponder()
+            return false
+        } else { // replace old text
+            return true
+        }
+    }
 }

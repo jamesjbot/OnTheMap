@@ -14,7 +14,7 @@ class ParseClient {
     
     var udacityClient: UdacityLoginClient = UdacityLoginClient.sharedInstance()
     var parseLocations: [[String : AnyObject]] = [[String : AnyObject]]()
-    
+    var model = Model.sharedInstance()
     
     // MARK: Functions
     
@@ -77,7 +77,7 @@ class ParseClient {
     }
     
     func getAllStudentLocationsAndRefreshView(completionHandlerFromGetAllStudents:(requestSuccess: Bool,error: NSError?) -> Void ) {
-        let request = NSMutableURLRequest(URL: NSURL(string: "\(Constants.URL)/StudentLocation")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: "\(Constants.URL)/StudentLocation?\(MethodParameters.Limit100)")!)
         formatRequestHeaders(request)
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
