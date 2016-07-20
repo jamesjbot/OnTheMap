@@ -13,7 +13,7 @@ class MyMapViewController: UIViewController, UINavigationBarDelegate, MKMapViewD
     
     // MARK: - Variables
     
-    var locations: [[String : AnyObject]] = [[String : AnyObject]]()
+    var locations: [StudentInformation] = [StudentInformation]()
     let model = Model.sharedInstance()
     
     // MARK: - IB elements
@@ -95,15 +95,14 @@ class MyMapViewController: UIViewController, UINavigationBarDelegate, MKMapViewD
         performUIUpdatesOnMain(){()-> Void in
             self.mapView.removeAnnotations(self.mapView.annotations)
             var annotations = [MKPointAnnotation]()
-            // FIXME I should read the student information from the array of student informations in the model
-            self.locations = model.students
-            for dictionary in self.locations {
-                let lat = CLLocationDegrees(dictionary["latitude"] as! Double)
-                let long = CLLocationDegrees(dictionary["longitude"] as! Double)
+            let locations = self.model.students
+            for student in  locations {
+                let lat = CLLocationDegrees((Double(student.latitude))!)
+                let long = CLLocationDegrees((Double(student.longitude))!)
                 let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
-                let first = dictionary["firstName"] as! String
-                let last = dictionary["lastName"] as! String
-                let mediaURL = dictionary["mediaURL"] as! String
+                let first = student.firstName
+                let last = student.lastName
+                let mediaURL = student.mediaURL
                 let annotation = MKPointAnnotation()
                 annotation.coordinate = coordinate
                 annotation.title = "\(first) \(last)"

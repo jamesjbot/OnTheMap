@@ -10,7 +10,7 @@ import Foundation
 
 protocol RefreshableFromModelProtocol {
 
-    var locations: [[String : AnyObject]] { get set}
+    var locations: [StudentInformation] { get set}
     
     func updateStudentLocationsInView()
     

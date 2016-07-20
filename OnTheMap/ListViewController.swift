@@ -14,8 +14,9 @@ class ListViewController: UIViewController, UINavigationBarDelegate, UITableView
     
     // MARK: - Variables
     
-    var locations: [[String : AnyObject]] = [[String : AnyObject]]()
+    var locations: [StudentInformation] = [StudentInformation]()
     let myPinImage:UIImage! = nil
+    var model = Model.sharedInstance()
     
     
     // MARK: - IB elements
@@ -96,7 +97,7 @@ class ListViewController: UIViewController, UINavigationBarDelegate, UITableView
     }
     
     func updateStudentLocationsInView(){
-        locations = ParseClient.sharedInstance().parseLocations
+        locations = model.students
         performUIUpdatesOnMain{
             self.myTableView.reloadData()
         }
@@ -120,14 +121,11 @@ class ListViewController: UIViewController, UINavigationBarDelegate, UITableView
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
-        
         let cell = tableView.dequeueReusableCellWithIdentifier("mytableviewcell") as! MyTableViewCell?
-        
-        // FIXME: instead of reading locations from the parse client I should read the array from Model.
-        let alocation : [String : AnyObject] = locations[indexPath.row]
-        let firstname = alocation["firstName"] as! String
-        let lastname = alocation["lastName"] as! String
-        let mapstring = alocation["mapString"]  as! String
+        let student : StudentInformation = locations[indexPath.row]
+        let firstname = student.firstName
+        let lastname = student.lastName
+        let mapstring = student.mapString
         
         // Setting the cell properties
         // Set the name and image
@@ -135,16 +133,15 @@ class ListViewController: UIViewController, UINavigationBarDelegate, UITableView
         let myPinImage = UIImage.init(named: "pin")
         let imageView = UIImageView(image: myPinImage )
         cell?.cellPinImage.image = imageView.image
-        cell?.weblink.text = alocation["mediaURL"] as? String
+        cell?.weblink.text = student.mediaURL
         return cell!
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let alocation : [String : AnyObject] = locations[indexPath.row]
-        let personURL: String = alocation["mediaURL"] as! String
+        let alocation : StudentInformation = locations[indexPath.row]
+        let personURL: String = alocation.mediaURL
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
         openURL(personURL)
-
-
     }
 
 }

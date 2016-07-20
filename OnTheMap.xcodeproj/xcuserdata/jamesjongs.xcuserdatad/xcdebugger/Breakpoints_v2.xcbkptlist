@@ -218,11 +218,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OnTheMap/ParseClient.swift"
-            timestampString = "490226000.391969"
+            timestampString = "490686306.068551"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "193"
-            endingLineNumber = "193"
+            startingLineNumber = "196"
+            endingLineNumber = "196"
             landmarkName = "parseResult(_:completionHandlerForParsingData:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -234,11 +234,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OnTheMap/ParseClient.swift"
-            timestampString = "490226000.391969"
+            timestampString = "490686306.068551"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "188"
-            endingLineNumber = "188"
+            startingLineNumber = "191"
+            endingLineNumber = "191"
             landmarkName = "parseResult(_:completionHandlerForParsingData:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -250,11 +250,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OnTheMap/ParseClient.swift"
-            timestampString = "490226000.391969"
+            timestampString = "490686306.068551"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "194"
-            endingLineNumber = "194"
+            startingLineNumber = "197"
+            endingLineNumber = "197"
             landmarkName = "parseResult(_:completionHandlerForParsingData:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -266,11 +266,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OnTheMap/ParseClient.swift"
-            timestampString = "490226000.391969"
+            timestampString = "490686306.068551"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "195"
-            endingLineNumber = "195"
+            startingLineNumber = "198"
+            endingLineNumber = "198"
             landmarkName = "parseResult(_:completionHandlerForParsingData:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -298,11 +298,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OnTheMap/ParseClient.swift"
-            timestampString = "490226000.391969"
+            timestampString = "490686306.068551"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "189"
-            endingLineNumber = "189"
+            startingLineNumber = "192"
+            endingLineNumber = "192"
             landmarkName = "parseResult(_:completionHandlerForParsingData:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -314,11 +314,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OnTheMap/ParseClient.swift"
-            timestampString = "490226000.391969"
+            timestampString = "490686306.068551"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "190"
-            endingLineNumber = "190"
+            startingLineNumber = "193"
+            endingLineNumber = "193"
             landmarkName = "parseResult(_:completionHandlerForParsingData:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -330,11 +330,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OnTheMap/ParseClient.swift"
-            timestampString = "490226000.391969"
+            timestampString = "490686306.068551"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "191"
-            endingLineNumber = "191"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
             landmarkName = "parseResult(_:completionHandlerForParsingData:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -442,11 +442,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OnTheMap/ParseClient.swift"
-            timestampString = "490226000.391969"
+            timestampString = "490686306.068551"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
             landmarkName = "getAllStudentLocationsAndRefreshView(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -458,13 +458,45 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OnTheMap/ParseClient.swift"
-            timestampString = "490226000.391969"
+            timestampString = "490686306.068551"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
             landmarkName = "getAllStudentLocationsAndRefreshView(_:)"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "OnTheMap.ParseClient.(getAllStudentLocationsAndRefreshView (OnTheMap.ParseClient) -&gt; ((requestSuccess : Swift.Bool, error : Swift.Optional&lt;__ObjC.NSError&gt;) -&gt; ()) -&gt; ()).(closure #1).(closure #1)"
+                  moduleName = "OnTheMap"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jamesjongs/Desktop/Projects/OnTheMap/OnTheMap/ParseClient.swift"
+                  timestampString = "490686919.316408"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "113"
+                  endingLineNumber = "113"
+                  offsetFromSymbolStart = "155">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "OnTheMap.ParseClient.(getAllStudentLocationsAndRefreshView (OnTheMap.ParseClient) -&gt; ((requestSuccess : Swift.Bool, error : Swift.Optional&lt;__ObjC.NSError&gt;) -&gt; ()) -&gt; ()).(closure #1).(closure #1).(closure #1)"
+                  moduleName = "OnTheMap"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jamesjongs/Desktop/Projects/OnTheMap/OnTheMap/ParseClient.swift"
+                  timestampString = "490686919.316565"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "113"
+                  endingLineNumber = "113"
+                  offsetFromSymbolStart = "7862">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -490,11 +522,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OnTheMap/ParseClient.swift"
-            timestampString = "490226000.391969"
+            timestampString = "490686306.068551"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
             landmarkName = "getAllStudentLocationsAndRefreshView(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -521,8 +553,8 @@
                   symbolName = "OnTheMap.MyMapViewController.updateStudentLocationsInView (OnTheMap.MyMapViewController)() -&gt; ()"
                   moduleName = "OnTheMap"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jamesjongs/Desktop/OnTheMap/OnTheMap/MyMapViewController.swift"
-                  timestampString = "490245814.03491"
+                  urlString = "file:///Users/jamesjongs/Desktop/Projects/OnTheMap/OnTheMap/MyMapViewController.swift"
+                  timestampString = "490686919.318597"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "95"
@@ -536,8 +568,8 @@
                   symbolName = "protocol witness for OnTheMap.RefreshableFromModelProtocol.updateStudentLocationsInView &lt;A where A: OnTheMap.RefreshableFromModelProtocol&gt; (A)() -&gt; () in conformance OnTheMap.MyMapViewController : OnTheMap.RefreshableFromModelProtocol in OnTheMap"
                   moduleName = "OnTheMap"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jamesjongs/Desktop/OnTheMap/OnTheMap/MyMapViewController.swift"
-                  timestampString = "490245814.035083"
+                  urlString = "file:///Users/jamesjongs/Desktop/Projects/OnTheMap/OnTheMap/MyMapViewController.swift"
+                  timestampString = "490686919.31875"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "94"
@@ -570,11 +602,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OnTheMap/ParseClient.swift"
-            timestampString = "490226000.391969"
+            timestampString = "490686306.068551"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "201"
-            endingLineNumber = "201"
+            startingLineNumber = "204"
+            endingLineNumber = "204"
             landmarkName = "sendError(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -633,8 +665,8 @@
                   symbolName = "OnTheMap.UdacityLoginClient.(getUserPublicData (OnTheMap.UdacityLoginClient) -&gt; ((requestSuccess : Swift.Optional&lt;Swift.Bool&gt;, error : Swift.Optional&lt;__ObjC.NSError&gt;) -&gt; ()) -&gt; ()).(closure #1)"
                   moduleName = "OnTheMap"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jamesjongs/Desktop/OnTheMap/OnTheMap/UdacityLoginClient.swift"
-                  timestampString = "490245814.038443"
+                  urlString = "file:///Users/jamesjongs/Desktop/Projects/OnTheMap/OnTheMap/UdacityLoginClient.swift"
+                  timestampString = "490686919.321836"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "123"
@@ -648,8 +680,8 @@
                   symbolName = "OnTheMap.UdacityLoginClient.(getUserPublicData (OnTheMap.UdacityLoginClient) -&gt; ((requestSuccess : Swift.Optional&lt;Swift.Bool&gt;, error : Swift.Optional&lt;__ObjC.NSError&gt;) -&gt; ()) -&gt; ()).(closure #1).(closure #1)"
                   moduleName = "OnTheMap"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jamesjongs/Desktop/OnTheMap/OnTheMap/UdacityLoginClient.swift"
-                  timestampString = "490245814.038597"
+                  urlString = "file:///Users/jamesjongs/Desktop/Projects/OnTheMap/OnTheMap/UdacityLoginClient.swift"
+                  timestampString = "490686919.321985"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "123"
@@ -681,8 +713,8 @@
                   symbolName = "OnTheMap.UdacityLoginClient.loginToUdacity (OnTheMap.UdacityLoginClient)(Swift.String, password : Swift.String, completionHandlerForLogin : (requestSuccess : Swift.Optional&lt;Swift.Bool&gt;, error : Swift.Optional&lt;__ObjC.NSError&gt;) -&gt; ()) -&gt; ()"
                   moduleName = "OnTheMap"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jamesjongs/Desktop/OnTheMap/OnTheMap/UdacityLoginClient.swift"
-                  timestampString = "490245814.039432"
+                  urlString = "file:///Users/jamesjongs/Desktop/Projects/OnTheMap/OnTheMap/UdacityLoginClient.swift"
+                  timestampString = "490686919.32283"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "32"
@@ -696,8 +728,8 @@
                   symbolName = "OnTheMap.UdacityLoginClient.(loginToUdacity (OnTheMap.UdacityLoginClient) -&gt; (Swift.String, password : Swift.String, completionHandlerForLogin : (requestSuccess : Swift.Optional&lt;Swift.Bool&gt;, error : Swift.Optional&lt;__ObjC.NSError&gt;) -&gt; ()) -&gt; ()).(closure #1)"
                   moduleName = "OnTheMap"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jamesjongs/Desktop/OnTheMap/OnTheMap/UdacityLoginClient.swift"
-                  timestampString = "490245814.039585"
+                  urlString = "file:///Users/jamesjongs/Desktop/Projects/OnTheMap/OnTheMap/UdacityLoginClient.swift"
+                  timestampString = "490686919.322977"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "33"
@@ -729,8 +761,8 @@
                   symbolName = "OnTheMap.UdacityLoginClient.(loginToUdacity (OnTheMap.UdacityLoginClient) -&gt; (Swift.String, password : Swift.String, completionHandlerForLogin : (requestSuccess : Swift.Optional&lt;Swift.Bool&gt;, error : Swift.Optional&lt;__ObjC.NSError&gt;) -&gt; ()) -&gt; ()).(closure #1)"
                   moduleName = "OnTheMap"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jamesjongs/Desktop/OnTheMap/OnTheMap/UdacityLoginClient.swift"
-                  timestampString = "490245814.040426"
+                  urlString = "file:///Users/jamesjongs/Desktop/Projects/OnTheMap/OnTheMap/UdacityLoginClient.swift"
+                  timestampString = "490686919.323792"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "33"
@@ -744,8 +776,8 @@
                   symbolName = "OnTheMap.UdacityLoginClient.(loginToUdacity (OnTheMap.UdacityLoginClient) -&gt; (Swift.String, password : Swift.String, completionHandlerForLogin : (requestSuccess : Swift.Optional&lt;Swift.Bool&gt;, error : Swift.Optional&lt;__ObjC.NSError&gt;) -&gt; ()) -&gt; ()).(closure #1).(closure #1)"
                   moduleName = "OnTheMap"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jamesjongs/Desktop/OnTheMap/OnTheMap/UdacityLoginClient.swift"
-                  timestampString = "490245814.040593"
+                  urlString = "file:///Users/jamesjongs/Desktop/Projects/OnTheMap/OnTheMap/UdacityLoginClient.swift"
+                  timestampString = "490686919.323941"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "35"
@@ -762,13 +794,45 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OnTheMap/LoginViewController.swift"
-            timestampString = "490674114.942134"
+            timestampString = "490687402.791705"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
             landmarkName = "attempToLogin(_:)"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "OnTheMap.LoginViewController.(attempToLogin (OnTheMap.LoginViewController) -&gt; (Swift.AnyObject) -&gt; ()).(closure #1)"
+                  moduleName = "OnTheMap"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jamesjongs/Desktop/Projects/OnTheMap/OnTheMap/LoginViewController.swift"
+                  timestampString = "490686919.32475"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "102">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "OnTheMap.LoginViewController.(attempToLogin (OnTheMap.LoginViewController) -&gt; (Swift.AnyObject) -&gt; ()).(closure #1).(closure #1)"
+                  moduleName = "OnTheMap"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jamesjongs/Desktop/Projects/OnTheMap/OnTheMap/LoginViewController.swift"
+                  timestampString = "490686919.324894"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "34"
+                  endingLineNumber = "34"
+                  offsetFromSymbolStart = "12">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -793,8 +857,8 @@
                   symbolName = "OnTheMap.UdacityLoginClient.loginToUdacity (OnTheMap.UdacityLoginClient)(Swift.String, password : Swift.String, completionHandlerForLogin : (requestSuccess : Swift.Optional&lt;Swift.Bool&gt;, error : Swift.Optional&lt;__ObjC.NSError&gt;) -&gt; ()) -&gt; ()"
                   moduleName = "OnTheMap"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jamesjongs/Desktop/OnTheMap/OnTheMap/UdacityLoginClient.swift"
-                  timestampString = "490245814.055431"
+                  urlString = "file:///Users/jamesjongs/Desktop/Projects/OnTheMap/OnTheMap/UdacityLoginClient.swift"
+                  timestampString = "490686919.325689"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "32"
@@ -808,8 +872,8 @@
                   symbolName = "OnTheMap.UdacityLoginClient.(loginToUdacity (OnTheMap.UdacityLoginClient) -&gt; (Swift.String, password : Swift.String, completionHandlerForLogin : (requestSuccess : Swift.Optional&lt;Swift.Bool&gt;, error : Swift.Optional&lt;__ObjC.NSError&gt;) -&gt; ()) -&gt; ()).(closure #1)"
                   moduleName = "OnTheMap"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jamesjongs/Desktop/OnTheMap/OnTheMap/UdacityLoginClient.swift"
-                  timestampString = "490245814.055585"
+                  urlString = "file:///Users/jamesjongs/Desktop/Projects/OnTheMap/OnTheMap/UdacityLoginClient.swift"
+                  timestampString = "490686919.325848"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "33"
@@ -817,6 +881,22 @@
                   offsetFromSymbolStart = "28">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "OnTheMap/UdacityLoginClient.swift"
+            timestampString = "490686822.780062"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "loginToUdacity(_:password:completionHandlerForLogin:)"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

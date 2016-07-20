@@ -152,6 +152,12 @@ class UdacityLoginClient {
             return
         }
         
+        // GUARD: There was no error from server; however server did not take further action
+        guard (response as! NSHTTPURLResponse).statusCode != 403 else {
+            sendError("Server not responding to request\(logAgain)")
+            return
+        }
+        
         // GUARD: Did we get successful 2XX response?
         guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
             sendError("There was an error logging in\(logAgain)")
@@ -161,12 +167,6 @@ class UdacityLoginClient {
         // GUARD: Was there data returned?
         guard let _ = data else {
             sendError("No data was returned by the request!\(logAgain)")
-            return
-        }
-        
-        // GUARD: There was no error from server; however server did not take further action
-        guard (response as! NSHTTPURLResponse).statusCode != 403 else {
-            sendError("Server not responding to request\(logAgain)")
             return
         }
         
