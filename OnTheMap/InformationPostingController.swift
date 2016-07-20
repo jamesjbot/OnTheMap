@@ -54,7 +54,7 @@ class InformationPostingController: UIViewController , UITextViewDelegate {
         CLGeocoder().geocodeAddressString(input) { (placemarksarray, error) -> Void in
             self.myActivityIndicator.stopAnimating()
             if error != nil {
-                self.displayForwardGeocodeError((error?.description)!)
+                self.displayAlertWindow("Geocoding Error", msg: input, actions: [self.dismissAction()])
             } else {
                 let placemark: CLPlacemark = placemarksarray![0] as CLPlacemark
                 self.ipcCoordinate = placemark.location!.coordinate
@@ -72,15 +72,6 @@ class InformationPostingController: UIViewController , UITextViewDelegate {
         }
     }
     
-    // MARK: Alerts
-    
-    func displayForwardGeocodeError(input:String){
-        performUIUpdatesOnMain({ () -> Void in
-            let alertWindow:UIAlertController = UIAlertController(title: "Geocoding Error", message: input, preferredStyle: UIAlertControllerStyle.Alert)
-            alertWindow.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil ))
-            self.presentViewController(alertWindow, animated: true, completion: nil)
-        })
-    }
     
     // MARK: UITextViewDelegate methods
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
