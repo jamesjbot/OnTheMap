@@ -69,7 +69,7 @@ class SubmitViewController: UIViewController, MKMapViewDelegate, UITextFieldDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.linkTextField.delegate = self
+        linkTextField.delegate = self
         // Increase the size of Spinner
         myActivityIndicator.transform = CGAffineTransformMakeScale(5, 5)
         let annotation = MKPointAnnotation()

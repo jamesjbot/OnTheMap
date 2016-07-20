@@ -27,7 +27,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBAction func attempToLogin(sender: AnyObject) {
         myActivityIndicator.startAnimating()
 
-        udacityClient.loginToUdacity(usernameTextField.text!, password: passwordTextField.text!) {
+            udacityClient.loginToUdacity(usernameTextField.text!, password: passwordTextField.text!) {
             (success, error) -> Void in
             self.stopAnimating()
             if success == true {
