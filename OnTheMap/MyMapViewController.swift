@@ -14,7 +14,7 @@ class MyMapViewController: UIViewController, UINavigationBarDelegate, MKMapViewD
     // MARK: - Variables
     
     var locations: [[String : AnyObject]] = [[String : AnyObject]]()
-    
+    let model = Model.sharedInstance()
     
     // MARK: - IB elements
     
@@ -93,9 +93,10 @@ class MyMapViewController: UIViewController, UINavigationBarDelegate, MKMapViewD
     // Method that will grab the student locations from the parseclient mode and update all student pin positions in the mapview
     func updateStudentLocationsInView(){
         performUIUpdatesOnMain(){()-> Void in
-            self.locations = ParseClient.sharedInstance().parseLocations
             self.mapView.removeAnnotations(self.mapView.annotations)
             var annotations = [MKPointAnnotation]()
+            // FIXME I should read the student information from the array of student informations in the model
+            self.locations = model.students
             for dictionary in self.locations {
                 let lat = CLLocationDegrees(dictionary["latitude"] as! Double)
                 let long = CLLocationDegrees(dictionary["longitude"] as! Double)

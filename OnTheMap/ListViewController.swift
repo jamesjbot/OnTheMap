@@ -122,6 +122,8 @@ class ListViewController: UIViewController, UINavigationBarDelegate, UITableView
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         
         let cell = tableView.dequeueReusableCellWithIdentifier("mytableviewcell") as! MyTableViewCell?
+        
+        // FIXME: instead of reading locations from the parse client I should read the array from Model.
         let alocation : [String : AnyObject] = locations[indexPath.row]
         let firstname = alocation["firstName"] as! String
         let lastname = alocation["lastName"] as! String

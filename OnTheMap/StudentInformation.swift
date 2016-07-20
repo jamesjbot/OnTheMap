@@ -11,7 +11,7 @@ import Foundation
 class Model{
 
     var students: [StudentInformation] = [StudentInformation]()
-    var thisStudent: StudentInformation = StudentInformation()
+    var thisStudentInformation: StudentInformation = StudentInformation()
     
     // MARK: - Singleton Implementation
     

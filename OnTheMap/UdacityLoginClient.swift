@@ -16,8 +16,8 @@ class UdacityLoginClient {
     
     var uniqueKey: String = ""
     var logAgain: String = "\nPlease Login Again"
-    var thisStudentInformation: StudentInformation = StudentInformation()
     var model = Model.sharedInstance()
+    var thisStudentInformation: StudentInformation = Model.sharedInstance().thisStudentInformation
     
     // MARK: Functions
     

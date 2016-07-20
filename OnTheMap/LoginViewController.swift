@@ -26,7 +26,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func attempToLogin(sender: AnyObject) {
         myActivityIndicator.startAnimating()
-
             udacityClient.loginToUdacity(usernameTextField.text!, password: passwordTextField.text!) {
             (success, error) -> Void in
             self.stopAnimating()
@@ -69,5 +68,4 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.view.endEditing(true)
         return false
     }
-    
 }

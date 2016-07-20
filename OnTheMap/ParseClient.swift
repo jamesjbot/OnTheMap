@@ -12,8 +12,7 @@ class ParseClient {
     
     // MARK: Variables
     
-    var udacityClient: UdacityLoginClient = UdacityLoginClient.sharedInstance()
-    var parseLocations: [[String : AnyObject]] = [[String : AnyObject]]()
+    private var parseLocations: [[String : AnyObject]] = [[String : AnyObject]]()
     var model = Model.sharedInstance()
     
     // MARK: Functions
@@ -91,17 +90,20 @@ class ParseClient {
                             // Sorting Student Information objects
                             let unSortedArray:[[String : AnyObject]] = arrayDictionaries as! [[String : AnyObject]]
                             let sortedArray:[[String : AnyObject]] = unSortedArray.sort(self.sortFunc)
-                            // This line saves the data into the model
+                            // These line saves the data into the model
                             self.parseLocations = sortedArray
-                            for dictionary in self.parseLocations{
-                                if dictionary["uniqueKey"] as! String == self.udacityClient.thisStudentInformation.uniqueKey {
+                            // FIXME I should save these as studentinformation in the model
+                            
+                            
+                            for dictionary in self.parseLocations{ // Save the user information specially
+                                if dictionary["uniqueKey"] as! String == self.model.thisStudentInformation.uniqueKey {
                                     // First and last name were populated when I logged into udacity
-                                    self.udacityClient.thisStudentInformation.latitude = dictionary["latitude"]?.description
-                                    self.udacityClient.thisStudentInformation.longitude = dictionary["longitude"]?.description
-                                    self.udacityClient.thisStudentInformation.mapString = dictionary["mapString"] as! String
-                                    self.udacityClient.thisStudentInformation.mediaURL = dictionary["mediaURL"] as! String
-                                    self.udacityClient.thisStudentInformation.objectId = dictionary["objectId"] as! String
-                                    self.udacityClient.thisStudentInformation.createdAt = dictionary["createdAt"] as! String
+                                    self.model.thisStudentInformation.latitude = dictionary["latitude"]?.description
+                                    self.model.thisStudentInformation.longitude = dictionary["longitude"]?.description
+                                    self.model.thisStudentInformation.mapString = dictionary["mapString"] as! String
+                                    self.model.thisStudentInformation.mediaURL = dictionary["mediaURL"] as! String
+                                    self.model.thisStudentInformation.objectId = dictionary["objectId"] as! String
+                                    self.model.thisStudentInformation.createdAt = dictionary["createdAt"] as! String
                                 }
                             }
                             completionHandlerFromGetAllStudents(requestSuccess: true, error: nil)
@@ -133,7 +135,7 @@ class ParseClient {
                             let newCreationTime = dict!["createdAt"] as! String
                             let newObjectID = dict!["objectId"] as! String
                             self.updatedOurStudentInforamtionUpdatedAtTime(newCreationTime)
-                            self.udacityClient.thisStudentInformation.objectId = newObjectID
+                            self.model.thisStudentInformation.objectId = newObjectID
                             completionHandlerForPost(success: true, error: nil)
                         } else {
                             completionHandlerForPost(success: false, error: error)
@@ -150,7 +152,7 @@ class ParseClient {
     
     // Update this student's location information
     func updateThisStudentLocation(student: StudentInformation, completionHandlerForUpdate: (success: Bool, error: NSError?) -> Void) {
-        let urlString = "https://api.parse.com/1/classes/StudentLocation/\(self.udacityClient.thisStudentInformation.objectId)"
+        let urlString = "https://api.parse.com/1/classes/StudentLocation/\(self.model.thisStudentInformation.objectId)"
         let url = NSURL(string: urlString)
         let request = NSMutableURLRequest(URL: url!)
         request.HTTPMethod = "PUT"
@@ -180,7 +182,7 @@ class ParseClient {
     
     // Update the student's informatin timestamp
     func updatedOurStudentInforamtionUpdatedAtTime(updateTime: String){
-        self.udacityClient.thisStudentInformation.updatedAt = updateTime
+        self.model.thisStudentInformation.updatedAt = updateTime
     }
     
     // Generic parsing function
