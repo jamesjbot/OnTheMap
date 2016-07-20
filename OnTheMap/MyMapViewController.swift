@@ -144,14 +144,8 @@ class MyMapViewController: UIViewController, UINavigationBarDelegate, MKMapViewD
     
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
-            let app = UIApplication.sharedApplication()
             let url: String = (view.annotation?.subtitle!)!
-            let targetURL: NSURL! = NSURL(string: url)
-            if targetURL != nil && app.canOpenURL(targetURL) {
-                app.openURL(targetURL)
-            } else {
-                displayAlertWindow("", msg: "Invalid Link", actions: [UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Cancel, handler: nil)])
-            }
+            openURL(url)
         }
     }
     

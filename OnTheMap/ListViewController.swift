@@ -129,7 +129,7 @@ class ListViewController: UIViewController, UINavigationBarDelegate, UITableView
         
         // Setting the cell properties
         // Set the name and image
-        cell?.personName.text = "\(indexPath.row+1). \(firstname) \(lastname) \(mapstring)"
+        cell?.personName.text = "\(indexPath.row+1). \(firstname) \(lastname) at \(mapstring)"
         let myPinImage = UIImage.init(named: "pin")
         let imageView = UIImageView(image: myPinImage )
         cell?.cellPinImage.image = imageView.image
@@ -140,8 +140,9 @@ class ListViewController: UIViewController, UINavigationBarDelegate, UITableView
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let alocation : [String : AnyObject] = locations[indexPath.row]
         let personURL: String = alocation["mediaURL"] as! String
-        UIApplication.sharedApplication().openURL(NSURL(string: personURL)!)
-        
+        openURL(personURL)
+
+
     }
 
 }

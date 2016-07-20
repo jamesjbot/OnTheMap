@@ -60,4 +60,17 @@ extension UIViewController {
     func checkStudentPostingStatusAndShowPostingScreen(completionHandlerCheckStudentPosting: (success: Bool, present: Bool?, error: NSError?)-> Void) {
         ParseClient.sharedInstance().getThisStudentLocation(UdacityLoginClient.sharedInstance().uniqueKey, completionHandlerForGetThisStudentLocation: completionHandlerCheckStudentPosting)
     }
+    
+    
+    func openURL(personURL: String){
+        let app = UIApplication.sharedApplication()
+        let url: String = (personURL)
+        let targetURL: NSURL! = NSURL(string: url)
+        if targetURL != nil && app.canOpenURL(targetURL) {
+            app.openURL(targetURL)
+        } else {
+            displayAlertWindow("", msg: "Invalid Link", actions: [UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Cancel, handler: nil)])
+        }
+    }
+    
 }
