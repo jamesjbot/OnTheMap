@@ -212,6 +212,12 @@ class ParseClient {
             return
         }
         
+        // GUARD: There was no error from server; however server did not take further action
+        guard (response as! NSHTTPURLResponse).statusCode != 403 else {
+            sendError("Server not responding to request")
+            return
+        }
+        
         // GUARD: Did we get successful 2XX response?
         guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
             sendError("Your request returned a status code other than 2xx \((response as? NSHTTPURLResponse)?.statusCode)")
@@ -224,11 +230,7 @@ class ParseClient {
             return
         }
         
-        // GUARD: There was no error from server; however server did not take further action
-        guard (response as! NSHTTPURLResponse).statusCode != 403 else {
-            sendError("Server not responding to request")
-            return
-        }
+
         
         completionHandlerForGuardChecks(requestSuccess: true, error: nil)
     }
