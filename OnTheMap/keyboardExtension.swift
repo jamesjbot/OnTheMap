@@ -36,7 +36,11 @@ extension UIViewController {
         print("current view position \(view.frame.origin)")
         
         if myKeyboardHeight != 0 {
-            view.transform = CGAffineTransformMakeTranslation(0,-myKeyboardHeight)
+            print("The autoresizingmask is \(view.autoresizingMask)")
+            view.autoresizingMask  = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleHeight]
+            print("The autoresizingmask is \(view.autoresizingMask)")
+            print("The autoresizingmask is \(view.autoresizingMask)")
+                view.transform = CGAffineTransformMakeTranslation(0,-myKeyboardHeight)
             print("new view position \(view.frame.origin)")
             
         }
@@ -53,11 +57,17 @@ extension UIViewController {
                 print("current view position \(view.frame.origin)")
         // Move the bottomTextFiled UIView down by the keyboard amount
         if getKeyboardHeight(notification) != 0 {
-            view.autoresizesSubviews = false
+                        print("The autoresizingmask is \(view.autoresizingMask)")
+            view.autoresizingMask  = UIViewAutoresizing.None
+                        print("The autoresizingmask is \(view.autoresizingMask)")
             view.transform = CGAffineTransformMakeTranslation(0, 0)
-            view.transform = CGAffineTransformMakeTranslation(0, -getKeyboardHeight(notification))
+            //view.transform = CGAffineTransformMakeTranslation(0, -getKeyboardHeight(notification))
             print("current view position \(view.frame.origin)")
             print("current view size  \(view.frame.size)")
+            performUIUpdatesOnMain(){
+                print("Initiated viewWillLayoutSubviews from keyboard hide")
+                self.viewWillLayoutSubviews()
+            }
         }
         unsubscribeFromKeyboardHideNotifications()
         subscribeToKeyboardShowNotifications()

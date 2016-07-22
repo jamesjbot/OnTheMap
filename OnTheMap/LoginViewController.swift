@@ -42,6 +42,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     
     // MARK: - Functions
+    override func viewWillLayoutSubviews() {
+        print("Viewwilllayoutsubviews called")
+        super.viewWillLayoutSubviews()
+    }
+    
     
     // Function to stop the spinner on the main ui thread
     func stopAnimating(){

@@ -28,6 +28,10 @@ class InformationPostingController: UIViewController , UITextViewDelegate {
     // MARK: - IBActions
     
     @IBAction func findOnMapPressed(sender: AnyObject) {
+        
+        //Test
+        viewWillLayoutSubviews()
+        
         if locationString.text == "Enter Your Location Here" || locationString.text == "" {
             performUIUpdatesOnMain {
                 let alertwindow:UIAlertController = UIAlertController(title: "", message: "You Must Enter a Location", preferredStyle: UIAlertControllerStyle.Alert)
@@ -41,6 +45,23 @@ class InformationPostingController: UIViewController , UITextViewDelegate {
     
     
     // MARK: - Functions
+    override func viewWillAppear(animated: Bool) {
+        print("viewwillappear called<---------")
+        super.viewWillAppear(animated)
+        print("Super View attributes size: \(view.frame.size) origin: \(view.frame.origin)\n")
+        for subview in view.subviews {
+            print("subview: \(subview.description), size: \(subview.frame.size) origin: \(subview.frame.origin)\n")
+        }
+        print("viewwillapear finished------>")
+    }
+    
+    
+    override func viewWillLayoutSubviews() {
+        print("viewWillLayoutSubviews called")
+        super.viewWillLayoutSubviews()
+        
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
