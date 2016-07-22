@@ -13,7 +13,7 @@ class ParseClient {
     // MARK: Variables
     
     private var parseLocations: [[String : AnyObject]] = [[String : AnyObject]]()
-    var model = Model.sharedInstance()
+    private var model = Model.sharedInstance()
     
     // MARK: Functions
     
@@ -90,20 +90,25 @@ class ParseClient {
                             // Sorting Student Information objects
                             let unSortedArray:[[String : AnyObject]] = arrayDictionaries as! [[String : AnyObject]]
                             let sortedArray:[[String : AnyObject]] = unSortedArray.sort(self.sortFunc)
+                            
                             // These line saves the data into the model
                             self.parseLocations = sortedArray
-                            // FIXME I should save these as studentinformation in the model
-                            
-                            
+                            // Remove all current students in the model
+                            Model.sharedInstance().deleteAllStudents()
                             for dictionary in self.parseLocations{ // Save the user information specially
-                                if dictionary["uniqueKey"] as! String == self.model.thisStudentInformation.uniqueKey {
+                                Model.sharedInstance().appendStudent(StudentInformation(id: dictionary))
+                                if dictionary["uniqueKey"] as! String == Model.sharedInstance().getThisStudent().uniqueKey {
                                     // First and last name were populated when I logged into udacity
-                                    self.model.thisStudentInformation.latitude = dictionary["latitude"]?.description
-                                    self.model.thisStudentInformation.longitude = dictionary["longitude"]?.description
-                                    self.model.thisStudentInformation.mapString = dictionary["mapString"] as! String
-                                    self.model.thisStudentInformation.mediaURL = dictionary["mediaURL"] as! String
-                                    self.model.thisStudentInformation.objectId = dictionary["objectId"] as! String
-                                    self.model.thisStudentInformation.createdAt = dictionary["createdAt"] as! String
+                                    var localStudentInfo = Model.sharedInstance().getThisStudent()
+                                    localStudentInfo.latitude = dictionary["latitude"]?.description
+                                    localStudentInfo.longitude = dictionary["longitude"]?.description
+                                    localStudentInfo.mapString = dictionary["mapString"] as! String
+                                    localStudentInfo.mediaURL = dictionary["mediaURL"] as! String
+                                    localStudentInfo.objectId = dictionary["objectId"] as! String
+                                    localStudentInfo.createdAt = dictionary["createdAt"] as! String
+                                    Model.sharedInstance().setThisStudent(localStudentInfo)
+                                    // FIXME the model should have all information now
+                                    print(Model.sharedInstance().getThisStudent())
                                 }
                             }
                             completionHandlerFromGetAllStudents(requestSuccess: true, error: nil)
@@ -133,9 +138,7 @@ class ParseClient {
                         (dict, error) -> Void in
                         if error == nil {
                             let newCreationTime = dict!["createdAt"] as! String
-                            let newObjectID = dict!["objectId"] as! String
-                            self.updatedOurStudentInforamtionUpdatedAtTime(newCreationTime)
-                            self.model.thisStudentInformation.objectId = newObjectID
+                            self.updatedOurStudentInforamtionUpdatedAtTime(student, updateTime: newCreationTime)
                             completionHandlerForPost(success: true, error: nil)
                         } else {
                             completionHandlerForPost(success: false, error: error)
@@ -152,7 +155,8 @@ class ParseClient {
     
     // Update this student's location information
     func updateThisStudentLocation(student: StudentInformation, completionHandlerForUpdate: (success: Bool, error: NSError?) -> Void) {
-        let urlString = "https://api.parse.com/1/classes/StudentLocation/\(self.model.thisStudentInformation.objectId)"
+        print(Model.sharedInstance().getThisStudent().objectId)
+        let urlString = "https://api.parse.com/1/classes/StudentLocation/\(Model.sharedInstance().getThisStudent().objectId)"
         let url = NSURL(string: urlString)
         let request = NSMutableURLRequest(URL: url!)
         request.HTTPMethod = "PUT"
@@ -166,7 +170,7 @@ class ParseClient {
                         (dict, error) -> Void in
                         if error == nil {
                             let returnUpdatedTime: String = dict!["updatedAt"] as! String
-                            self.updatedOurStudentInforamtionUpdatedAtTime(returnUpdatedTime)
+                            self.updatedOurStudentInforamtionUpdatedAtTime(student, updateTime: returnUpdatedTime)
                             completionHandlerForUpdate(success: true, error: nil)
                         } else {
                             completionHandlerForUpdate(success: false, error: error)
@@ -181,8 +185,18 @@ class ParseClient {
     }
     
     // Update the student's informatin timestamp
-    func updatedOurStudentInforamtionUpdatedAtTime(updateTime: String){
-        self.model.thisStudentInformation.updatedAt = updateTime
+    func updatedOurStudentInforamtionUpdatedAtTime(var inputStudent: StudentInformation, updateTime: String){
+        // Update the isolated version
+        inputStudent.updatedAt = updateTime
+        Model.sharedInstance().setThisStudent(inputStudent)
+        // Update the annotated version
+        var allStudents = Model.sharedInstance().getStudents()
+        for (index,info) in allStudents.enumerate(){
+            if info.objectId == inputStudent.objectId {
+                allStudents[index] = inputStudent
+            }
+        }
+        Model.sharedInstance().setStudents(allStudents)
     }
     
     // Generic parsing function
@@ -229,8 +243,6 @@ class ParseClient {
             sendError("No data was returned by the request!")
             return
         }
-        
-
         
         completionHandlerForGuardChecks(requestSuccess: true, error: nil)
     }

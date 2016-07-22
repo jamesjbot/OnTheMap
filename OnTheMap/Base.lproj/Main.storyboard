@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1808" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1808" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="8UY-na-MDf">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
@@ -28,7 +29,7 @@
                                 <rect key="frame" x="216" y="125" width="167.5" height="349.5"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="udacity" translatesAutoresizingMaskIntoConstraints="NO" id="xic-hN-hOQ">
-                                        <rect key="frame" x="19.5" y="0.0" width="128" height="128"/>
+                                        <rect key="frame" x="20" y="0.0" width="128" height="128"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="128" id="4fj-t5-D7x"/>
                                             <constraint firstAttribute="width" constant="128" id="w1N-xc-ouo"/>
@@ -386,12 +387,12 @@
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="K9g-XY-a16" firstAttribute="leading" secondItem="rc3-yy-yHr" secondAttribute="leadingMargin" constant="-20" id="4h7-SB-uAy"/>
-                            <constraint firstItem="Ygo-ij-ABk" firstAttribute="top" secondItem="sVA-gt-e8S" secondAttribute="bottom" constant="20" id="74U-nh-dka"/>
-                            <constraint firstItem="sVA-gt-e8S" firstAttribute="top" secondItem="K9g-XY-a16" secondAttribute="bottom" id="FTr-zj-Rbf"/>
+                            <constraint firstItem="sVA-gt-e8S" firstAttribute="bottom" secondItem="Ygo-ij-ABk" secondAttribute="top" constant="-20" id="74U-nh-dka"/>
+                            <constraint firstItem="K9g-XY-a16" firstAttribute="bottom" secondItem="sVA-gt-e8S" secondAttribute="top" id="FTr-zj-Rbf"/>
                             <constraint firstItem="nJO-jE-Fzh" firstAttribute="centerX" secondItem="rc3-yy-yHr" secondAttribute="centerX" id="G3P-Z8-P2r"/>
                             <constraint firstAttribute="trailingMargin" secondItem="K9g-XY-a16" secondAttribute="trailing" constant="-20" id="bix-It-cXH"/>
                             <constraint firstItem="nJO-jE-Fzh" firstAttribute="centerY" secondItem="rc3-yy-yHr" secondAttribute="centerY" id="fCg-rK-TUh"/>
-                            <constraint firstItem="K9g-XY-a16" firstAttribute="top" secondItem="F1A-VH-efZ" secondAttribute="bottom" id="hKV-6V-HxJ"/>
+                            <constraint firstItem="F1A-VH-efZ" firstAttribute="bottom" secondItem="K9g-XY-a16" secondAttribute="top" id="hKV-6V-HxJ"/>
                             <constraint firstItem="sVA-gt-e8S" firstAttribute="leading" secondItem="K9g-XY-a16" secondAttribute="leading" id="hkh-K4-AUG"/>
                             <constraint firstItem="sVA-gt-e8S" firstAttribute="trailing" secondItem="K9g-XY-a16" secondAttribute="trailing" id="rHT-Nc-VIM"/>
                         </constraints>
@@ -420,11 +421,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="IbG-04-kge">
-                                <rect key="frame" x="0.0" y="240" width="600" height="360"/>
-                            </mapView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" usesAttributedText="YES" allowsEditingTextAttributes="YES" clearsOnBeginEditing="YES" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="Hxr-Xi-Pb1">
-                                <rect key="frame" x="0.0" y="28" width="600" height="212"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="200" contentHorizontalAlignment="center" contentVerticalAlignment="center" usesAttributedText="YES" allowsEditingTextAttributes="YES" clearsOnBeginEditing="YES" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="Hxr-Xi-Pb1">
+                                <rect key="frame" x="0.0" y="64" width="600" height="172.5"/>
                                 <color key="backgroundColor" red="0.35528781300000001" green="0.58738864700000004" blue="0.86981139519999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Enter Link Address">
@@ -440,11 +438,14 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="adjustsFontSizeToFitWidth" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </textField>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="IbG-04-kge">
+                                <rect key="frame" x="0.0" y="237" width="600" height="363"/>
+                            </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ryw-cf-pK2">
-                                <rect key="frame" x="191" y="496.5" width="219" height="28.5"/>
+                                <rect key="frame" x="191" y="536.5" width="219" height="28.5"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="219" id="bib-qo-8qm"/>
+                                    <constraint firstAttribute="width" constant="219" id="ZTb-va-EoQ"/>
                                 </constraints>
                                 <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
                                 <state key="normal">
@@ -468,7 +469,7 @@
                                 </connections>
                             </button>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jrm-dZ-R9b">
-                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
                                 <items>
                                     <navigationItem id="BTn-9p-zzm">
                                         <barButtonItem key="rightBarButtonItem" title="Cancel" id="MdI-pL-m7g">
@@ -486,23 +487,22 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Hxr-Xi-Pb1" firstAttribute="top" secondItem="SVr-Ci-bUn" secondAttribute="bottom" constant="8" id="5bz-CV-nzd"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Hxr-Xi-Pb1" secondAttribute="trailing" constant="-20" id="7TB-o6-bgU"/>
                             <constraint firstItem="jrm-dZ-R9b" firstAttribute="centerX" secondItem="wdz-dx-vlM" secondAttribute="centerX" id="Aa3-Rd-qqL"/>
+                            <constraint firstItem="jrm-dZ-R9b" firstAttribute="top" secondItem="SVr-Ci-bUn" secondAttribute="bottom" id="L0P-sh-7zs"/>
                             <constraint firstItem="IbG-04-kge" firstAttribute="top" secondItem="Hxr-Xi-Pb1" secondAttribute="bottom" id="LUX-lI-oAk"/>
                             <constraint firstItem="jrm-dZ-R9b" firstAttribute="leading" secondItem="wdz-dx-vlM" secondAttribute="leadingMargin" constant="-20" id="Lqq-dj-PeQ"/>
-                            <constraint firstItem="jrm-dZ-R9b" firstAttribute="top" secondItem="SVr-Ci-bUn" secondAttribute="bottom" constant="8" id="Nw9-gk-SKm"/>
                             <constraint firstItem="IbG-04-kge" firstAttribute="leading" secondItem="wdz-dx-vlM" secondAttribute="leadingMargin" constant="-20" id="R3W-c1-p3z"/>
                             <constraint firstItem="Ryw-cf-pK2" firstAttribute="centerX" secondItem="wdz-dx-vlM" secondAttribute="centerX" id="TzX-BB-txt"/>
                             <constraint firstItem="Hxr-Xi-Pb1" firstAttribute="centerX" secondItem="wdz-dx-vlM" secondAttribute="centerX" id="Wn1-qc-jhz"/>
                             <constraint firstItem="Hxr-Xi-Pb1" firstAttribute="leading" secondItem="wdz-dx-vlM" secondAttribute="leadingMargin" constant="-20" id="Z8N-3e-ye3"/>
-                            <constraint firstItem="IbG-04-kge" firstAttribute="top" secondItem="SVr-Ci-bUn" secondAttribute="bottom" constant="220" id="bHI-e7-sD8"/>
                             <constraint firstItem="FGo-Q3-VGO" firstAttribute="centerX" secondItem="wdz-dx-vlM" secondAttribute="centerX" id="br9-ki-l6o"/>
                             <constraint firstItem="HVs-Po-oNq" firstAttribute="top" secondItem="IbG-04-kge" secondAttribute="bottom" id="d4B-RQ-dmP"/>
+                            <constraint firstItem="Hxr-Xi-Pb1" firstAttribute="top" secondItem="jrm-dZ-R9b" secondAttribute="bottom" id="eMe-pi-bob"/>
                             <constraint firstItem="FGo-Q3-VGO" firstAttribute="centerY" secondItem="wdz-dx-vlM" secondAttribute="centerY" id="gE9-tc-O0o"/>
-                            <constraint firstItem="HVs-Po-oNq" firstAttribute="top" secondItem="Ryw-cf-pK2" secondAttribute="bottom" constant="75" id="gHM-eU-JvW"/>
+                            <constraint firstItem="HVs-Po-oNq" firstAttribute="top" secondItem="Ryw-cf-pK2" secondAttribute="bottom" constant="35" id="gHM-eU-JvW"/>
                             <constraint firstAttribute="trailingMargin" secondItem="IbG-04-kge" secondAttribute="trailing" constant="-20" id="hZe-LV-21s"/>
-                            <constraint firstItem="HVs-Po-oNq" firstAttribute="top" secondItem="IbG-04-kge" secondAttribute="bottom" id="jVk-5y-Eb4"/>
+                            <constraint firstItem="IbG-04-kge" firstAttribute="height" secondItem="Hxr-Xi-Pb1" secondAttribute="height" multiplier="2.1" id="njA-Ur-BfX"/>
                             <constraint firstAttribute="trailingMargin" secondItem="jrm-dZ-R9b" secondAttribute="trailing" constant="-20" id="yIn-Wr-WHU"/>
                         </constraints>
                     </view>

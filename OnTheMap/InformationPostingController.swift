@@ -47,6 +47,12 @@ class InformationPostingController: UIViewController , UITextViewDelegate {
         self.locationString.delegate = self
         // Increase the size of Spinner
         myActivityIndicator.transform = CGAffineTransformMakeScale(5, 5)
+        
+        
+        print("location maxY,\(locationString.frame.maxY)")
+        print("location miny,\(locationString.frame.minY)")
+        
+        subscribeToKeyboardShowNotifications()
     }
     
     func encodeAddress(input:String) {

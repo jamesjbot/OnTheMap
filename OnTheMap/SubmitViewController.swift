@@ -36,14 +36,14 @@ class SubmitViewController: UIViewController, MKMapViewDelegate, UITextFieldDele
     @IBAction func submit(sender: UIButton) {
         myActivityIndicator.startAnimating()
         // Get the last instance of this students informatin and update position, link, and display text
-        var passableStudentInformation: StudentInformation = UdacityLoginClient.sharedInstance().thisStudentInformation
+        var passableStudentInformation: StudentInformation = Model.sharedInstance().getThisStudent()
         passableStudentInformation.latitude = incomingCoordinate.latitude.description
         passableStudentInformation.longitude = incomingCoordinate.longitude.description
         passableStudentInformation.mediaURL = linkTextField.text
         passableStudentInformation.mapString = locationString
         
         // Decide to post or update this student's information
-        if UdacityLoginClient.sharedInstance().thisStudentInformation.objectId != nil {
+        if Model.sharedInstance().getThisStudent().objectId != nil {
             parseClient.updateThisStudentLocation(passableStudentInformation){
                 (success, error) -> Void in
                 self.stopAnimating()

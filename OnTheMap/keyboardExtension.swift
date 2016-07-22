@@ -25,11 +25,20 @@ extension UIViewController {
     
     // Moves the view up prior to presenting keyboard
     func keyboardWillShow(notification: NSNotification){
+        print("Keyboard will show called,\(notification)")
+        print("current view position \(view.frame.origin)")
+        print("current view size  \(view.frame.size)")
+        view.autoresizesSubviews = false
         // Get height of keyboard and save it globally
         let myKeyboardHeight = getKeyboardHeight(notification)
         // Move the whole UIView up by the keyboard amount
+        
+        print("current view position \(view.frame.origin)")
+        
         if myKeyboardHeight != 0 {
             view.transform = CGAffineTransformMakeTranslation(0,-myKeyboardHeight)
+            print("new view position \(view.frame.origin)")
+            
         }
         // Stop responding to keyboard will SHOW notificaions
         unsubscribeFromKeyboardShowNotifications()
@@ -39,9 +48,16 @@ extension UIViewController {
     
     // Moves the view down when the keyboard is dismissed
     func keyboardWillHide(notification: NSNotification){
+        print("keyboard will hide called,\(notification)")
+        
+                print("current view position \(view.frame.origin)")
         // Move the bottomTextFiled UIView down by the keyboard amount
         if getKeyboardHeight(notification) != 0 {
+            view.autoresizesSubviews = false
             view.transform = CGAffineTransformMakeTranslation(0, 0)
+            view.transform = CGAffineTransformMakeTranslation(0, -getKeyboardHeight(notification))
+            print("current view position \(view.frame.origin)")
+            print("current view size  \(view.frame.size)")
         }
         unsubscribeFromKeyboardHideNotifications()
         subscribeToKeyboardShowNotifications()

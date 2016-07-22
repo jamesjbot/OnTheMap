@@ -95,8 +95,8 @@ class MyMapViewController: UIViewController, UINavigationBarDelegate, MKMapViewD
         performUIUpdatesOnMain(){()-> Void in
             self.mapView.removeAnnotations(self.mapView.annotations)
             var annotations = [MKPointAnnotation]()
-            let locations = self.model.students
-            for student in  locations {
+            let locations = self.model.getStudents()
+            for student in locations {
                 let lat = CLLocationDegrees((Double(student.latitude))!)
                 let long = CLLocationDegrees((Double(student.longitude))!)
                 let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)

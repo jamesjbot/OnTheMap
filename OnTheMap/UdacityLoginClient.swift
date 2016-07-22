@@ -14,10 +14,10 @@ class UdacityLoginClient {
     
     // MARK:  Variables
     
-    var uniqueKey: String = ""
-    var logAgain: String = "\nPlease Login Again"
-    var model = Model.sharedInstance()
-    var thisStudentInformation: StudentInformation = Model.sharedInstance().thisStudentInformation
+    private var uniqueKey: String = ""
+    private var logAgain: String = "\nPlease Login Again"
+    private var model = Model.sharedInstance()
+    private var thisStudentInformation: StudentInformation = Model.sharedInstance().getThisStudent()
     
     // MARK: Functions
     
@@ -41,6 +41,7 @@ class UdacityLoginClient {
                             // Store the key in the model for later use
                             self.thisStudentInformation.uniqueKey = self.uniqueKey
                             // Get and store public user data
+                            Model.sharedInstance().setThisStudent(self.thisStudentInformation)
                             self.getUserPublicData(completionHandlerForLogin)
                         } else {
                             completionHandlerForLogin(requestSuccess: false, error: error)
@@ -110,6 +111,7 @@ class UdacityLoginClient {
                             let firstname: String = dicOfLoginData["first_name"] as! String
                             self.thisStudentInformation.lastName = lastname
                             self.thisStudentInformation.firstName = firstname
+                            Model.sharedInstance().setThisStudent(self.thisStudentInformation)
                             completionHandlerForPublicData(requestSuccess: true, error: nil)
                             return
                         } else {
@@ -153,14 +155,14 @@ class UdacityLoginClient {
         }
         
         // GUARD: There was no error from server; however server did not take further action
-        guard (response as! NSHTTPURLResponse).statusCode != 403 else {
-            sendError("Server not responding to request\(logAgain)")
+        guard let statuscode: Int = (response as! NSHTTPURLResponse).statusCode where statuscode != 403 else {
+            sendError("Invalid login credentials \(logAgain)")
             return
         }
         
         // GUARD: Did we get successful 2XX response?
         guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
-            sendError("There was an error logging in\(logAgain)")
+            sendError("There was an error logging in \((response as? NSHTTPURLResponse)?.statusCode) \(logAgain)")
             return
         }
         

@@ -97,7 +97,7 @@ class ListViewController: UIViewController, UINavigationBarDelegate, UITableView
     }
     
     func updateStudentLocationsInView(){
-        locations = model.students
+        locations = model.getStudents()
         performUIUpdatesOnMain{
             self.myTableView.reloadData()
         }
@@ -140,6 +140,7 @@ class ListViewController: UIViewController, UINavigationBarDelegate, UITableView
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let alocation : StudentInformation = locations[indexPath.row]
         let personURL: String = alocation.mediaURL
+        // Unselect entry on table
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         openURL(personURL)
     }

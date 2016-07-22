@@ -10,14 +10,46 @@ import Foundation
 
 class Model{
 
-    var students: [StudentInformation] = [StudentInformation]()
-    var thisStudentInformation: StudentInformation = StudentInformation()
+     private var students: [StudentInformation]!
+     private var thisStudentInformation: StudentInformation!
     
     // MARK: - Singleton Implementation
     
-    private init(){}
+    private init(){
+        students = [StudentInformation]()
+        thisStudentInformation = StudentInformation()
+    }
+    
+    func getThisStudent() -> StudentInformation! {
+        return thisStudentInformation
+    }
+    
+    func setThisStudent(input: StudentInformation) -> Bool {
+        thisStudentInformation = input
+        return true
+    }
+    
+    func getStudents() -> [StudentInformation] {
+        return students
+    }
+    
+    func setStudents(input: [StudentInformation]) -> Bool {
+        students = input
+        return true
+    }
+    
+    func deleteAllStudents() -> Bool {
+         students = [StudentInformation]()
+        return true
+    }
+    
+    func appendStudent(input: StudentInformation) -> Bool {
+        students.append(input)
+        return true
+    }
     
     class func sharedInstance() -> Model {
+
         struct Singleton {
             static var sharedInstance = Model()
         }
@@ -44,11 +76,11 @@ struct StudentInformation {
         createdAt = id["createdAt"] as! String
         firstName = id["firstName"] as! String
         lastName = id["lastName"] as! String
-        latitude = id["latitude"] as! String
-        longitude = id["longitude"] as! String
+        latitude = (id["latitude"] as! NSNumber).description
+        longitude = (id["longitude"] as! NSNumber).description
         mapString = id["mapString"] as! String
         mediaURL = id["mediaURL"] as! String
-        objectId = id["objectID"] as! String
+        objectId = id["objectId"] as! String
         uniqueKey = id["uniqueKey"] as! String
         updatedAt = id["updatedAt"] as! String
     }

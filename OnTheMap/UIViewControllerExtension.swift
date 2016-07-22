@@ -58,7 +58,7 @@ extension UIViewController {
     
     
     func checkStudentPostingStatusAndShowPostingScreen(completionHandlerCheckStudentPosting: (success: Bool, present: Bool?, error: NSError?)-> Void) {
-        ParseClient.sharedInstance().getThisStudentLocation(UdacityLoginClient.sharedInstance().uniqueKey, completionHandlerForGetThisStudentLocation: completionHandlerCheckStudentPosting)
+        ParseClient.sharedInstance().getThisStudentLocation(Model.sharedInstance().getThisStudent().uniqueKey, completionHandlerForGetThisStudentLocation: completionHandlerCheckStudentPosting)
     }
     
     
