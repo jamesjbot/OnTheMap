@@ -30,8 +30,6 @@ extension UIViewController {
         let myKeyboardHeight = getKeyboardHeight(notification)
         // Move the whole UIView up by the keyboard amount
         
-        print("current view position \(view.frame.origin)")
-        
         if myKeyboardHeight != 0 {
             view.autoresizingMask  = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleHeight]
             view.transform = CGAffineTransformMakeTranslation(0,-myKeyboardHeight)
