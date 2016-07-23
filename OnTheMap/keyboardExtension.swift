@@ -25,9 +25,6 @@ extension UIViewController {
     
     // Moves the view up prior to presenting keyboard
     func keyboardWillShow(notification: NSNotification){
-        print("Keyboard will show called,\(notification)")
-        print("current view position \(view.frame.origin)")
-        print("current view size  \(view.frame.size)")
         view.autoresizesSubviews = false
         // Get height of keyboard and save it globally
         let myKeyboardHeight = getKeyboardHeight(notification)
@@ -36,12 +33,8 @@ extension UIViewController {
         print("current view position \(view.frame.origin)")
         
         if myKeyboardHeight != 0 {
-            print("The autoresizingmask is \(view.autoresizingMask)")
             view.autoresizingMask  = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleHeight]
-            print("The autoresizingmask is \(view.autoresizingMask)")
-            print("The autoresizingmask is \(view.autoresizingMask)")
-                view.transform = CGAffineTransformMakeTranslation(0,-myKeyboardHeight)
-            print("new view position \(view.frame.origin)")
+            view.transform = CGAffineTransformMakeTranslation(0,-myKeyboardHeight)
             
         }
         // Stop responding to keyboard will SHOW notificaions
@@ -52,22 +45,15 @@ extension UIViewController {
     
     // Moves the view down when the keyboard is dismissed
     func keyboardWillHide(notification: NSNotification){
-        print("keyboard will hide called,\(notification)")
-        
-                print("current view position \(view.frame.origin)")
         // Move the bottomTextFiled UIView down by the keyboard amount
         if getKeyboardHeight(notification) != 0 {
-                        print("The autoresizingmask is \(view.autoresizingMask)")
             view.autoresizingMask  = UIViewAutoresizing.None
-                        print("The autoresizingmask is \(view.autoresizingMask)")
             view.transform = CGAffineTransformMakeTranslation(0, 0)
             //view.transform = CGAffineTransformMakeTranslation(0, -getKeyboardHeight(notification))
-            print("current view position \(view.frame.origin)")
-            print("current view size  \(view.frame.size)")
-            performUIUpdatesOnMain(){
-                print("Initiated viewWillLayoutSubviews from keyboard hide")
-                self.viewWillLayoutSubviews()
-            }
+//    FIXME delete lines       performUIUpdatesOnMain(){
+//                print("Initiated viewWillLayoutSubviews from keyboard hide")
+//                self.viewWillLayoutSubviews()
+//            }
         }
         unsubscribeFromKeyboardHideNotifications()
         subscribeToKeyboardShowNotifications()
