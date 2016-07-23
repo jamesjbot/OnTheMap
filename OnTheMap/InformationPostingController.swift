@@ -55,7 +55,7 @@ class InformationPostingController: UIViewController , UITextViewDelegate {
         CLGeocoder().geocodeAddressString(input) { (placemarksarray, error) -> Void in
             self.myActivityIndicator.stopAnimating()
             if error != nil {
-                self.displayAlertWindow("Geocoding Error", msg: input, actions: [self.dismissAction()])
+                self.displayAlertWindow("Geocoding Error", msg: "\(input) Failed Please try again", actions: [self.dismissAction()])
             } else {
                 let placemark: CLPlacemark = placemarksarray![0] as CLPlacemark
                 self.ipcCoordinate = placemark.location!.coordinate
