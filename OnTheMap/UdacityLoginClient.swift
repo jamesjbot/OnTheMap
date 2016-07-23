@@ -162,7 +162,7 @@ class UdacityLoginClient {
         
         // GUARD: Did we get successful 2XX response?
         guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
-            sendError("There was an error logging in \((response as? NSHTTPURLResponse)?.statusCode) \(logAgain)")
+            sendError("There was an error logging in\(logAgain)")
             return
         }
         
