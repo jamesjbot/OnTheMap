@@ -314,87 +314,81 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="900" axis="vertical" alignment="center" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="sVA-gt-e8S">
-                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="850" verticalCompressionResistancePriority="850" misplaced="YES" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="bEk-VC-XNG">
-                                        <rect key="frame" x="158" y="0.0" width="285" height="0.0"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="500" misplaced="YES" text="Where are you" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mlW-C5-h5f">
-                                                <rect key="frame" x="0.0" y="0.0" width="285" height="0.0"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="45"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="500" misplaced="YES" text="studying" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="evY-Bd-v8M">
-                                                <rect key="frame" x="49" y="0.0" width="187" height="0.0"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="45"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="500" verticalHuggingPriority="251" misplaced="YES" text="today?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hYX-qX-g11">
-                                                <rect key="frame" x="76" y="0.0" width="134" height="0.0"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="45"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                    <textView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="240" verticalHuggingPriority="240" misplaced="YES" text="Enter Your Location Here" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="rc0-bo-PXa">
-                                        <rect key="frame" x="0.0" y="3" width="600" height="501"/>
-                                        <color key="backgroundColor" red="0.35528781300000001" green="0.58738864700000004" blue="0.86981139519999995" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="45" id="vlU-hW-BzK"/>
-                                        </constraints>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </textView>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="200" verticalHuggingPriority="200" layoutMarginsFollowReadableWidth="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b79-Yl-HYx">
-                                        <rect key="frame" x="216" y="507" width="168" height="29"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="5" maxY="0.0"/>
-                                        <state key="normal" title="Find on the Map" image="pin">
-                                            <color key="titleColor" red="0.35528781300000001" green="0.58738864700000004" blue="0.86981139519999995" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="findOnMapPressed:" destination="8UY-na-MDf" eventType="touchUpInside" id="WaS-Gm-WaK"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="500" text="Where are you" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mlW-C5-h5f">
+                                <rect key="frame" x="157" y="64" width="285" height="54"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="45"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="500" text="studying" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="evY-Bd-v8M">
+                                <rect key="frame" x="206" y="118" width="187" height="54"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="45"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="500" verticalHuggingPriority="251" text="today?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hYX-qX-g11">
+                                <rect key="frame" x="233" y="172" width="134" height="54"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="45"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="240" verticalHuggingPriority="240" text="Enter Your Location Here" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="rc0-bo-PXa">
+                                <rect key="frame" x="20" y="226" width="560" height="326"/>
+                                <color key="backgroundColor" red="0.35528781300000001" green="0.58738864700000004" blue="0.86981139519999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="rc0-bo-PXa" secondAttribute="trailing" id="IcA-zE-c3R"/>
-                                    <constraint firstItem="rc0-bo-PXa" firstAttribute="leading" secondItem="sVA-gt-e8S" secondAttribute="leading" id="PIu-Vd-NSJ"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="45" id="vlU-hW-BzK"/>
                                 </constraints>
-                            </stackView>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textView>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="nJO-jE-Fzh">
                                 <rect key="frame" x="290" y="290" width="20" height="20"/>
                                 <color key="color" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="200" verticalHuggingPriority="200" layoutMarginsFollowReadableWidth="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b79-Yl-HYx">
+                                <rect key="frame" x="216" y="568" width="168" height="32"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="5" maxY="0.0"/>
+                                <state key="normal" title="Find on the Map" image="pin">
+                                    <color key="titleColor" red="0.35528781300000001" green="0.58738864700000004" blue="0.86981139519999995" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="findOnMapPressed:" destination="8UY-na-MDf" eventType="touchUpInside" id="WaS-Gm-WaK"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="K9g-XY-a16" firstAttribute="leading" secondItem="rc3-yy-yHr" secondAttribute="leadingMargin" constant="-20" id="4h7-SB-uAy"/>
-                            <constraint firstItem="K9g-XY-a16" firstAttribute="bottom" secondItem="sVA-gt-e8S" secondAttribute="top" id="FTr-zj-Rbf"/>
+                            <constraint firstItem="mlW-C5-h5f" firstAttribute="centerX" secondItem="rc3-yy-yHr" secondAttribute="centerX" id="9Jl-65-7zC"/>
+                            <constraint firstItem="mlW-C5-h5f" firstAttribute="top" secondItem="K9g-XY-a16" secondAttribute="bottom" id="ARZ-bu-xEx"/>
                             <constraint firstItem="nJO-jE-Fzh" firstAttribute="centerX" secondItem="rc3-yy-yHr" secondAttribute="centerX" id="G3P-Z8-P2r"/>
-                            <constraint firstItem="sVA-gt-e8S" firstAttribute="bottom" secondItem="Ygo-ij-ABk" secondAttribute="top" id="Lsm-TT-7pS"/>
+                            <constraint firstItem="rc0-bo-PXa" firstAttribute="leading" secondItem="rc3-yy-yHr" secondAttribute="leadingMargin" id="MKH-YP-MNI"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="rc0-bo-PXa" secondAttribute="trailing" id="MiW-aM-RDc"/>
+                            <constraint firstItem="b79-Yl-HYx" firstAttribute="centerX" secondItem="rc3-yy-yHr" secondAttribute="centerX" id="TUv-jU-3rg"/>
                             <constraint firstAttribute="trailingMargin" secondItem="K9g-XY-a16" secondAttribute="trailing" constant="-20" id="bix-It-cXH"/>
+                            <constraint firstItem="rc0-bo-PXa" firstAttribute="top" secondItem="hYX-qX-g11" secondAttribute="bottom" id="bmC-Eh-A8t"/>
+                            <constraint firstItem="hYX-qX-g11" firstAttribute="top" secondItem="evY-Bd-v8M" secondAttribute="bottom" id="bzc-1x-vyg"/>
                             <constraint firstItem="nJO-jE-Fzh" firstAttribute="centerY" secondItem="rc3-yy-yHr" secondAttribute="centerY" id="fCg-rK-TUh"/>
+                            <constraint firstItem="Ygo-ij-ABk" firstAttribute="top" secondItem="b79-Yl-HYx" secondAttribute="bottom" id="fek-TM-brh"/>
                             <constraint firstItem="F1A-VH-efZ" firstAttribute="bottom" secondItem="K9g-XY-a16" secondAttribute="top" id="hKV-6V-HxJ"/>
-                            <constraint firstItem="sVA-gt-e8S" firstAttribute="leading" secondItem="K9g-XY-a16" secondAttribute="leading" id="hkh-K4-AUG"/>
-                            <constraint firstItem="sVA-gt-e8S" firstAttribute="trailing" secondItem="K9g-XY-a16" secondAttribute="trailing" id="rHT-Nc-VIM"/>
+                            <constraint firstItem="evY-Bd-v8M" firstAttribute="top" secondItem="mlW-C5-h5f" secondAttribute="bottom" id="hs6-cm-tlQ"/>
+                            <constraint firstItem="evY-Bd-v8M" firstAttribute="centerX" secondItem="rc3-yy-yHr" secondAttribute="centerX" id="lBg-qe-lp6"/>
+                            <constraint firstItem="hYX-qX-g11" firstAttribute="centerX" secondItem="rc3-yy-yHr" secondAttribute="centerX" id="mxb-Ko-Z4F"/>
+                            <constraint firstItem="b79-Yl-HYx" firstAttribute="top" secondItem="rc0-bo-PXa" secondAttribute="bottom" constant="16" id="pGy-TI-CFY"/>
                         </constraints>
                     </view>
                     <connections>

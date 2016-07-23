@@ -35,7 +35,6 @@ extension UIViewController {
         if myKeyboardHeight != 0 {
             view.autoresizingMask  = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleHeight]
             view.transform = CGAffineTransformMakeTranslation(0,-myKeyboardHeight)
-            
         }
         // Stop responding to keyboard will SHOW notificaions
         unsubscribeFromKeyboardShowNotifications()
@@ -47,14 +46,13 @@ extension UIViewController {
     func keyboardWillHide(notification: NSNotification){
         // Move the bottomTextFiled UIView down by the keyboard amount
         if getKeyboardHeight(notification) != 0 {
-            view.autoresizingMask  = UIViewAutoresizing.None
+            // This allows autolayout in portrait mode, to adjust the Location Textview dynamically. Otherwise the view will autosize and be the incorrect size on screen.
+            view.autoresizingMask = UIViewAutoresizing.FlexibleWidth
             view.transform = CGAffineTransformMakeTranslation(0, 0)
-            //view.transform = CGAffineTransformMakeTranslation(0, -getKeyboardHeight(notification))
-//    FIXME delete lines       performUIUpdatesOnMain(){
-//                print("Initiated viewWillLayoutSubviews from keyboard hide")
-//                self.viewWillLayoutSubviews()
-//            }
+
         }
+        // This restores the autosizing properties
+        view.autoresizingMask  = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleHeight]
         unsubscribeFromKeyboardHideNotifications()
         subscribeToKeyboardShowNotifications()
     }
