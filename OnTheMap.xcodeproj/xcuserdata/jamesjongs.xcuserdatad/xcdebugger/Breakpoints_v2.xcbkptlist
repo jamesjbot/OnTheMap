@@ -488,9 +488,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "103"
-            endingLineNumber = "103"
-            landmarkName = "updateStudentLocationsInView()"
-            landmarkType = "5">
+            endingLineNumber = "103">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -520,9 +518,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "92"
-            endingLineNumber = "92"
-            landmarkName = "MyMapViewController"
-            landmarkType = "3">
+            endingLineNumber = "92">
             <Locations>
                <Location
                   shouldBeEnabled = "Yes"
@@ -568,9 +564,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "117"
-            endingLineNumber = "117"
-            landmarkName = "MyMapViewController"
-            landmarkType = "3">
+            endingLineNumber = "117">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -600,9 +594,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "100"
-            endingLineNumber = "100"
-            landmarkName = "getUserPublicData(_:)"
-            landmarkType = "5">
+            endingLineNumber = "100">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -616,9 +608,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "42"
-            endingLineNumber = "42"
-            landmarkName = "loginToUdacity(_:password:completionHandlerForLogin:)"
-            landmarkType = "5">
+            endingLineNumber = "42">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -632,9 +622,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "73"
-            endingLineNumber = "73"
-            landmarkName = "viewWillAppear(_:)"
-            landmarkType = "5">
+            endingLineNumber = "73">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -726,9 +714,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "54"
-            endingLineNumber = "54"
-            landmarkName = "Singleton"
-            landmarkType = "3">
+            endingLineNumber = "54">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -774,9 +760,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "180"
-            endingLineNumber = "180"
-            landmarkName = "UdacityLoginClient"
-            landmarkType = "3">
+            endingLineNumber = "180">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -790,9 +774,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "115"
-            endingLineNumber = "115"
-            landmarkName = "getUserPublicData(_:)"
-            landmarkType = "5">
+            endingLineNumber = "115">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -807,8 +789,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "34"
             endingLineNumber = "34"
-            landmarkName = "attempToLogin(_:)"
-            landmarkType = "5">
+            landmarkName = "LoginViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -822,9 +804,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "71"
-            endingLineNumber = "71"
-            landmarkName = "viewWillAppear(_:)"
-            landmarkType = "5">
+            endingLineNumber = "71">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -838,9 +818,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "63"
-            endingLineNumber = "63"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "5">
+            endingLineNumber = "63">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -886,9 +864,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "17"
-            endingLineNumber = "17"
-            landmarkName = "MyMapViewController"
-            landmarkType = "3">
+            endingLineNumber = "17">
             <Locations>
                <Location
                   shouldBeEnabled = "Yes"
@@ -949,9 +925,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "16"
-            endingLineNumber = "16"
-            landmarkName = "MyMapViewController"
-            landmarkType = "3">
+            endingLineNumber = "16">
             <Locations>
                <Location
                   shouldBeEnabled = "Yes"
@@ -1087,105 +1061,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "46"
-            endingLineNumber = "46"
-            landmarkName = "appendStudent(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "OnTheMap/keyboardExtension.swift"
-            timestampString = "490920372.179707"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
-            landmarkName = "keyboardWillHide(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "OnTheMap/keyboardExtension.swift"
-            timestampString = "490920372.179707"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
-            landmarkName = "keyboardWillHide(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "OnTheMap/keyboardExtension.swift"
-            timestampString = "490920372.179707"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
-            landmarkName = "keyboardWillHide(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "OnTheMap/keyboardExtension.swift"
-            timestampString = "490920372.179707"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
-            landmarkName = "keyboardWillHide(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "OnTheMap/keyboardExtension.swift"
-            timestampString = "490920372.179707"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
-            landmarkName = "UIViewController"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "OnTheMap/keyboardExtension.swift"
-            timestampString = "490920372.179707"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
-            landmarkName = "UIViewController"
-            landmarkType = "3">
+            endingLineNumber = "46">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
