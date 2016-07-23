@@ -350,9 +350,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "131"
-            endingLineNumber = "131"
-            landmarkName = "mapView(_:viewForAnnotation:)"
-            landmarkType = "5">
+            endingLineNumber = "131">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -366,9 +364,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "81"
-            endingLineNumber = "81"
-            landmarkName = "getStudentLocationsFromParseClient()"
-            landmarkType = "5">
+            endingLineNumber = "81">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -382,9 +378,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "99"
-            endingLineNumber = "99"
-            landmarkName = "updateStudentLocationsInView()"
-            landmarkType = "5">
+            endingLineNumber = "99">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
