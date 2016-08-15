@@ -39,7 +39,7 @@ class SubmitViewController: UIViewController, MKMapViewDelegate, UITextFieldDele
         var passableStudentInformation: StudentInformation = Model.sharedInstance().getThisStudent()
         passableStudentInformation.latitude = incomingCoordinate.latitude.description
         passableStudentInformation.longitude = incomingCoordinate.longitude.description
-        passableStudentInformation.mediaURL = linkTextField.text
+        passableStudentInformation.mediaURL = linkTextField.text == "Enter Link Address" ? "" : linkTextField.text
         passableStudentInformation.mapString = locationString
         
         // Decide to post or update this student's information
