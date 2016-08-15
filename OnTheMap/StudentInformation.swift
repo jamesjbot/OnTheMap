@@ -73,16 +73,16 @@ struct StudentInformation {
     
     
     init( id: [ String: AnyObject ]){
-        createdAt = id["createdAt"] as! String
-        firstName = id["firstName"] as! String
-        lastName = id["lastName"] as! String
-        latitude = (id["latitude"] as! NSNumber).description
-        longitude = (id["longitude"] as! NSNumber).description
-        mapString = id["mapString"] as! String
-        mediaURL = id["mediaURL"] as! String
-        objectId = id["objectId"] as! String
-        uniqueKey = id["uniqueKey"] as! String
-        updatedAt = id["updatedAt"] as! String
+        createdAt = (id["createdAt"] ?? "") as! String
+        firstName = (id["firstName"] ?? "") as! String
+        lastName = (id["lastName"] ?? "") as! String
+        latitude = ((id["latitude"] ?? 0) as! NSNumber).description
+        longitude = ((id["longitude"] ?? 0) as! NSNumber).description
+        mapString = (id["mapString"] ?? "") as! String
+        mediaURL = (id["mediaURL"] ?? "") as! String
+        objectId = (id["objectId"] ?? "") as! String
+        uniqueKey = (id["uniqueKey"] ?? "") as! String
+        updatedAt = (id["updatedAt"] ?? "") as! String
     }
 
     init(){

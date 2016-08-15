@@ -76,7 +76,7 @@ class ParseClient {
     }
     
     func getAllStudentLocationsAndRefreshView(completionHandlerFromGetAllStudents:(requestSuccess: Bool,error: NSError?) -> Void ) {
-        let request = NSMutableURLRequest(URL: NSURL(string: "\(Constants.URL)/StudentLocation?\(MethodParameters.Limit100)")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: "\(Constants.URL)/StudentLocation?\(MethodParameters.Limit100)&\(MethodParameters.ReverseCreationDateOrder)")!)
         formatRequestHeaders(request)
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
@@ -97,7 +97,7 @@ class ParseClient {
                             Model.sharedInstance().deleteAllStudents()
                             for dictionary in self.parseLocations{ // Save the user information specially
                                 Model.sharedInstance().appendStudent(StudentInformation(id: dictionary))
-                                if dictionary["uniqueKey"] as! String == Model.sharedInstance().getThisStudent().uniqueKey {
+                                if (dictionary["uniqueKey"] ?? "")as! String == Model.sharedInstance().getThisStudent().uniqueKey {
                                     // First and last name were populated when I logged into udacity
                                     var localStudentInfo = Model.sharedInstance().getThisStudent()
                                     localStudentInfo.latitude = dictionary["latitude"]?.description
