@@ -150,7 +150,7 @@ class UdacityLoginClient {
         
         // GUARD: For any error
         guard (error == nil) else { // Handle error...
-            sendError("\(error?.localizedDescription)\(logAgain)")
+            sendError("\(error!.localizedDescription)\(logAgain)")
             return
         }
         
