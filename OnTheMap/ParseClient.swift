@@ -33,7 +33,7 @@ class ParseClient {
     
     // This function tells the view controller whether or not this student already has a location entry, this should just tell the viewcontroller whether or not present a warning
     func getThisStudentLocation(input: String, completionHandlerForGetThisStudentLocation: (success: Bool, present: Bool? ,error: NSError?) -> Void ){
-        let urlString = "https://api.parse.com/1/classes/StudentLocation?where=%7B%22uniqueKey%22%3A%22\(input)%22%7D"
+        let urlString = "\(Constants.URL)/StudentLocation?where=%7B%22uniqueKey%22%3A%22\(input)%22%7D"
         let url = NSURL(string: urlString)
         let request = NSMutableURLRequest(URL: url!)
         formatRequestHeaders(request)
@@ -205,7 +205,7 @@ class ParseClient {
         
         // GUARD: For any error
         guard (error == nil) else { // Handle error...
-            sendError((error?.localizedDescription)!)
+            sendError((error!.localizedDescription))
             return
         }
         
@@ -217,7 +217,7 @@ class ParseClient {
         
         // GUARD: Did we get successful 2XX response?
         guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
-            sendError("Your request returned a status code other than 2xx \((response as? NSHTTPURLResponse)?.statusCode)")
+            sendError("Your request returned a status code other than 2xx \((response as? NSHTTPURLResponse)!.statusCode)")
             return
         }
         

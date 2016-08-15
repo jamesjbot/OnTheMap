@@ -83,4 +83,11 @@ class InformationPostingController: UIViewController , UITextViewDelegate {
             return true
         }
     }
+    
+    
+    func textViewShouldBeginEditing(textView: UITextView) -> Bool {
+        textView.text = ""
+        return true
+    }
+    
 }
