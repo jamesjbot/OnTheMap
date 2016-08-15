@@ -139,7 +139,7 @@ class ParseClient {
     
     // Update this student's location information
     func updateThisStudentLocation(student: StudentInformation, completionHandlerForUpdate: (success: Bool, error: NSError?) -> Void) {
-        let urlString = "https://api.parse.com/1/classes/StudentLocation/\(Model.sharedInstance().getThisStudent().objectId)"
+        let urlString = "\(Constants.URL)/StudentLocation/\(Model.sharedInstance().getThisStudent().objectId)"
         let url = NSURL(string: urlString)
         let request = NSMutableURLRequest(URL: url!)
         request.HTTPMethod = "PUT"
