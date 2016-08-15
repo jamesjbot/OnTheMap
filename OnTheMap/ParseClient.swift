@@ -17,15 +17,6 @@ class ParseClient {
     
     // MARK: Functions
     
-    // Function to sort Student Information structures, instead of using the api's sorting method
-    func sortFunc(dict1: [String:AnyObject], dict2: [String:AnyObject]) -> Bool {
-        if dict1[Keys.UpdatedAt] as! String > dict2[Keys.UpdatedAt] as! String {
-            return true // When dictionary 1 goes before dictionary 2
-        } else {
-            return false
-        }
-    }
-    
     // MARK: Convenience functions to help create url requests
     
     func formatRequest(request: NSMutableURLRequest, student: StudentInformation){
@@ -86,13 +77,8 @@ class ParseClient {
                         self.parseResult(data) {
                         (dict, error) -> Void in
                         if error == nil {
-                            let arrayDictionaries = dict!["results"] as! NSArray
-                            // Sorting Student Information objects
-                            let unSortedArray:[[String : AnyObject]] = arrayDictionaries as! [[String : AnyObject]]
-                            let sortedArray:[[String : AnyObject]] = unSortedArray.sort(self.sortFunc)
-                            
-                            // These line saves the data into the model
-                            self.parseLocations = sortedArray
+                            self.parseLocations = dict!["results"] as! [[String : AnyObject]]
+
                             // Remove all current students in the model
                             Model.sharedInstance().deleteAllStudents()
                             for dictionary in self.parseLocations{ // Save the user information specially
