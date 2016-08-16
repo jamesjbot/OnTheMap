@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-
 class UdacityLoginClient {
     
     // MARK:  Variables
@@ -56,6 +55,26 @@ class UdacityLoginClient {
         }
         task.resume()
     }
+    
+    // Method to login with Facebook access token
+    func loginToUdacityWithFacebook(token: String){
+        let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/session")!)
+        request.HTTPMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.HTTPBody = "{\"facebook_mobile\": {\"access_token\": \"\(token)\"}}".dataUsingEncoding(NSUTF8StringEncoding)
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(request) { data, response, error in
+            if error != nil { // Handle error...
+                return
+            }
+            let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5)) /* subset response data! */
+            print(NSString(data: newData, encoding: NSUTF8StringEncoding))
+            print("Succesfully logged into Udacity with facebook")
+        }
+        task.resume()
+    }
+    
     
     func logOutOfUdacity(presentingView:UIViewController, completionHandlerForLogout: (requestSuccess: Bool?, error: NSError?)-> Void){
         let request = NSMutableURLRequest(URL: NSURL(string: "\(Constants.UdacityURL)\(Methods.Session)")!)

@@ -82,16 +82,17 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
     @param result The results of the login
     @param error The error (if any) from the login
     */
-    public func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!){
+    internal func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!){
         print("Logged into facebook successfully")
         print("The result is\(FBSDKAccessToken.currentAccessToken())")
+        udacityClient.loginToUdacityWithFacebook(FBSDKAccessToken.currentAccessToken().tokenString)
     }
     
     /*!
     @abstract Sent to the delegate when the button was used to logout.
     @param loginButton The button that was clicked.
     */
-    public func loginButtonDidLogOut(loginButton: FBSDKLoginButton!){
+    internal func loginButtonDidLogOut(loginButton: FBSDKLoginButton!){
         print("Logged out of facebook succcessfully")
     }
     
