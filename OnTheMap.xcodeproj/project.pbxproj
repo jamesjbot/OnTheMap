@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		A7026CD41D387EF90060ACD3 /* keyboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7026CD31D387EF90060ACD3 /* keyboardExtension.swift */; };
+		A73BF3511D62CD9A00ACF60B /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A73BF3501D62CD9A00ACF60B /* FBSDKCoreKit.framework */; };
+		A73BF3541D62CDCB00ACF60B /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A73BF3521D62CDCB00ACF60B /* FBSDKLoginKit.framework */; };
+		A73BF3551D62CDCB00ACF60B /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A73BF3531D62CDCB00ACF60B /* FBSDKShareKit.framework */; };
 		A740E9E61CF8349C00301644 /* InformationPostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A740E9E51CF8349C00301644 /* InformationPostingController.swift */; };
 		A7486BFA1CDA010000981463 /* UdacityConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7486BF91CDA010000981463 /* UdacityConstants.swift */; };
 		A7486BFD1CDA01F200981463 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7486BFC1CDA01F200981463 /* LoginViewController.swift */; };
@@ -50,6 +53,9 @@
 
 /* Begin PBXFileReference section */
 		A7026CD31D387EF90060ACD3 /* keyboardExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = keyboardExtension.swift; sourceTree = "<group>"; };
+		A73BF3501D62CD9A00ACF60B /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		A73BF3521D62CDCB00ACF60B /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		A73BF3531D62CDCB00ACF60B /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		A740E9E51CF8349C00301644 /* InformationPostingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationPostingController.swift; sourceTree = "<group>"; };
 		A7486BF91CDA010000981463 /* UdacityConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityConstants.swift; sourceTree = "<group>"; };
 		A7486BFC1CDA01F200981463 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -84,6 +90,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A73BF3541D62CDCB00ACF60B /* FBSDKLoginKit.framework in Frameworks */,
+				A73BF3511D62CD9A00ACF60B /* FBSDKCoreKit.framework in Frameworks */,
+				A73BF3551D62CDCB00ACF60B /* FBSDKShareKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +121,16 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		A73BF3561D62CDD900ACF60B /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				A73BF3521D62CDCB00ACF60B /* FBSDKLoginKit.framework */,
+				A73BF3531D62CDCB00ACF60B /* FBSDKShareKit.framework */,
+				A73BF3501D62CD9A00ACF60B /* FBSDKCoreKit.framework */,
+			);
+			name = Framework;
+			sourceTree = "<group>";
+		};
 		A7486BFB1CDA01D400981463 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -130,6 +149,7 @@
 		A751FDDA1CD2968900153AE6 = {
 			isa = PBXGroup;
 			children = (
+				A73BF3561D62CDD900ACF60B /* Framework */,
 				A751FDE51CD2968900153AE6 /* OnTheMap */,
 				A751FDFD1CD2968900153AE6 /* OnTheMapTests */,
 				A751FE081CD2968900153AE6 /* OnTheMapUITests */,
@@ -294,6 +314,7 @@
 				TargetAttributes = {
 					A751FDE21CD2968900153AE6 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = T37NKE3UT9;
 					};
 					A751FDF91CD2968900153AE6 = {
 						CreatedOnToolsVersion = 7.2;
@@ -514,10 +535,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = OnTheMap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = JamesJongs.OnTheMap;
+				PRODUCT_BUNDLE_IDENTIFIER = com.JamesJongs.OnTheMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -527,10 +554,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = OnTheMap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = JamesJongs.OnTheMap;
+				PRODUCT_BUNDLE_IDENTIFIER = com.JamesJongs.OnTheMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
