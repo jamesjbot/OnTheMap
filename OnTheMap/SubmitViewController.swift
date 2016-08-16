@@ -50,7 +50,7 @@ class SubmitViewController: UIViewController, MKMapViewDelegate, UITextFieldDele
                 if success {
                     self.exitToAnnotation()
                 } else {
-                    self.displayAlertWindow("Submit Error", msg: "(error?.localizedDescription)!\n Submit again", actions: [self.dismissAction()])
+                    self.displayAlertWindow("Submit Error", msg: "Sorry there was an error\n Submit again", actions: [self.dismissAction()])
                 }
             }
         } else {
@@ -60,7 +60,7 @@ class SubmitViewController: UIViewController, MKMapViewDelegate, UITextFieldDele
                 if success {
                     self.exitToAnnotation()
                 } else {
-                    self.displayAlertWindow("Submit Error", msg: "(error?.localizedDescription)!\n Submit again", actions: [self.dismissAction()])
+                    self.displayAlertWindow("Submit Error", msg: "Sorry there was an error\n Please Submit again", actions: [self.dismissAction()])
                 }
             }
         }
