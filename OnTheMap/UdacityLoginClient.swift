@@ -57,7 +57,7 @@ class UdacityLoginClient {
     }
     
     // Method to login with Facebook access token
-    func loginToUdacityWithFacebook(token: String){
+    func loginToUdacityWithFacebook(token: String, completionHandlerForLogin: (requestSuccess:Bool?,error: NSError?)-> Void){
         let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/session")!)
         request.HTTPMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
@@ -65,12 +65,29 @@ class UdacityLoginClient {
         request.HTTPBody = "{\"facebook_mobile\": {\"access_token\": \"\(token)\"}}".dataUsingEncoding(NSUTF8StringEncoding)
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
-            if error != nil { // Handle error...
-                return
+            self.guardChecks(data,response: response, error: error) {
+                (success, error) -> Void in
+                if success == true {
+                    // Parsing data
+                    self.parseResult(data) {dict, error in
+                        if error == nil {
+                            let dicOfLoginData = dict!["account"] as! NSDictionary
+                            self.uniqueKey = dicOfLoginData["key"] as! String
+                            // Store the key in the model for later use
+                            self.thisStudentInformation.uniqueKey = self.uniqueKey
+                            // Get and store public user data
+                            Model.sharedInstance().setThisStudent(self.thisStudentInformation)
+                            self.getUserPublicData(completionHandlerForLogin)
+                        } else {
+                            completionHandlerForLogin(requestSuccess: false, error: error)
+                            return
+                        }
+                    }
+                } else {
+                    completionHandlerForLogin(requestSuccess: false, error: error)
+                    return
+                }
             }
-            let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5)) /* subset response data! */
-            print(NSString(data: newData, encoding: NSUTF8StringEncoding))
-            print("Succesfully logged into Udacity with facebook")
         }
         task.resume()
     }

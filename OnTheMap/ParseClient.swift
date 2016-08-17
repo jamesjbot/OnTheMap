@@ -81,7 +81,7 @@ class ParseClient {
 
                             // Remove all current students in the model
                             Model.sharedInstance().deleteAllStudents()
-                            for dictionary in self.parseLocations{ // Save the user information specially
+                            for dictionary in self.parseLocations{ // Save the user information seperately
                                 Model.sharedInstance().appendStudent(StudentInformation(id: dictionary))
                                 if (dictionary["uniqueKey"] ?? "")as! String == Model.sharedInstance().getThisStudent().uniqueKey {
                                     // First and last name were populated when I logged into udacity

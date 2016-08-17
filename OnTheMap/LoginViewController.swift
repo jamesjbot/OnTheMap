@@ -18,6 +18,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var myActivityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var facebookButton: FBSDKLoginButton!
     
     
     // MARK: - IBActions
@@ -35,7 +36,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
                     self.performSegueWithIdentifier("LoginToMap", sender: self)
                 }
             } else { // There is an error
-                self.displayAlertWindow("Login Error", msg: (error!.localizedDescription) , actions: [self.dismissAction()])
+                self.displayAlertWindow("Login Error", msg: "Error logging in\nPlease try again" , actions: [self.dismissAction()])
             }
         }
     }
@@ -59,10 +60,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
         subscribeToKeyboardShowNotifications()
         
         // Add facebook login
-        let loginButton = FBSDKLoginButton()
-        loginButton.delegate = self
-        loginButton.center = self.view.center
-        self.view.addSubview(loginButton)
+        facebookButton.delegate = self
+
     }
     
     
@@ -85,7 +84,20 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
     internal func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!){
         print("Logged into facebook successfully")
         print("The result is\(FBSDKAccessToken.currentAccessToken())")
-        udacityClient.loginToUdacityWithFacebook(FBSDKAccessToken.currentAccessToken().tokenString)
+        myActivityIndicator.startAnimating()
+        udacityClient.loginToUdacityWithFacebook(FBSDKAccessToken.currentAccessToken().tokenString) {
+            (success, error) -> Void in
+            self.stopAnimating()
+            if success == true {
+                performUIUpdatesOnMain {
+                    self.performSegueWithIdentifier("LoginToMap", sender: self)
+                }
+            } else { // There is an error
+                self.displayAlertWindow("Login Error", msg: "Error logging in\nPlease try again" , actions: [self.dismissAction()])
+            }
+        }
+
+        
     }
     
     /*!

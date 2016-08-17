@@ -25,8 +25,8 @@
                                 <rect key="frame" x="290" y="290" width="20" height="20"/>
                                 <color key="color" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </activityIndicatorView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="xqP-PO-KvI">
-                                <rect key="frame" x="216" y="125" width="167.5" height="349.5"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="xqP-PO-KvI">
+                                <rect key="frame" x="216" y="97" width="168" height="410"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="udacity" translatesAutoresizingMaskIntoConstraints="NO" id="xic-hN-hOQ">
                                         <rect key="frame" x="20" y="0.0" width="128" height="128"/>
@@ -36,23 +36,23 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login to Udacity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AOW-Xp-EfN">
-                                        <rect key="frame" x="0.0" y="154" width="167.5" height="27.5"/>
+                                        <rect key="frame" x="0.0" y="154" width="168" height="28"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Username" borderStyle="roundedRect" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dVA-5S-LFd">
-                                        <rect key="frame" x="0.0" y="207" width="167.5" height="30"/>
+                                        <rect key="frame" x="0.0" y="208" width="168" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZXz-fW-n9t">
-                                        <rect key="frame" x="0.0" y="263" width="167.5" height="30"/>
+                                        <rect key="frame" x="0.0" y="264" width="168" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BPv-Oj-HXs">
-                                        <rect key="frame" x="0.0" y="319" width="167.5" height="30"/>
+                                        <rect key="frame" x="0.0" y="320" width="168" height="30"/>
                                         <color key="backgroundColor" white="0.54000000000000004" alpha="1" colorSpace="calibratedWhite"/>
                                         <state key="normal" title="Login">
                                             <color key="titleShadowColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -60,6 +60,14 @@
                                         <connections>
                                             <action selector="attempToLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="e9d-i8-qWm"/>
                                         </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A3D-kc-gF9" customClass="FBSDKLoginButton">
+                                        <rect key="frame" x="23" y="376" width="122" height="34"/>
+                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="FB Placeholder">
+                                            <color key="titleColor" red="0.068608251879999999" green="0.58463541669999997" blue="0.1424648744" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" red="1" green="0.38581268318611317" blue="0.9580081188226095" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -81,6 +89,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="facebookButton" destination="A3D-kc-gF9" id="HJw-Ma-v1y"/>
                         <outlet property="loginButton" destination="BPv-Oj-HXs" id="rBZ-vr-63P"/>
                         <outlet property="myActivityIndicator" destination="x9H-aH-T1l" id="aQT-r8-94M"/>
                         <outlet property="passwordTextField" destination="ZXz-fW-n9t" id="7gp-wC-cJR"/>
