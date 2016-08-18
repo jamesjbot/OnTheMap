@@ -24,7 +24,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
     // MARK: - Variables
     
     var fbLoginManager: FBSDKLoginManager!
-    let udacityLoginURL = "https://www.udacity.com/account/auth#!/signup"
+    let udacitySignUpURL = "https://www.udacity.com/account/auth#!/signup"
     
     // MARK: - IBActions
     
@@ -37,21 +37,21 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
     @IBAction func attempToLogin(sender: AnyObject) {
         myActivityIndicator.startAnimating()
         if FBSDKAccessToken.currentAccessToken() == nil {
-            udacityClient.loginToUdacity(usernameTextField.text!, password: passwordTextField.text!,completionHandlerForLogin: loginToMapClosure)
+            udacityClient.loginToUdacity(usernameTextField.text!, password: passwordTextField.text!,completionHandlerForLogin: loginToMapViewClosure)
         } else {
-            udacityClient.loginToUdacityWithFacebook(FBSDKAccessToken.currentAccessToken().tokenString, completionHandlerForLogin: loginToMapClosure)
+            udacityClient.loginToUdacityWithFacebook(FBSDKAccessToken.currentAccessToken().tokenString, completionHandlerForLogin: loginToMapViewClosure)
         }
         
     }
     
     @IBAction func signUp2Udacity(sender: AnyObject) {
-        let url = udacityLoginURL
+        let url = udacitySignUpURL
         openURL(url)
     }
     
     // MARK: - Closure Expressions
     
-    func loginToMapClosure(success: Bool?,error: NSError?) -> Void {
+    func loginToMapViewClosure(success: Bool?,error: NSError?) -> Void {
         self.stopAnimating()
         if success == true {
             performUIUpdatesOnMain {
@@ -79,14 +79,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
         myActivityIndicator.transform = CGAffineTransformMakeScale(5, 5)
         subscribeToKeyboardShowNotifications()
         
-        // Add facebook login
+        // Add facebook loginbutton relationships
         facebookButton.delegate = self
         fbLoginManager = FBSDKLoginManager()
     }
     
     override func viewWillAppear(b: Bool){
         super.viewWillAppear(b)
-        // When Facebook is logged in we should only present the option to continue with facebook login on the login button as per Single Sign On style.
+        // When Facebook is logged in we should only present the option to continue with facebook login on the login button. If the use wants to logout of facebook and use the regular login they can
         if FBSDKAccessToken.currentAccessToken() != nil {
             loginButton.setTitle("Continue with Facebook Login", forState: UIControlState.Normal)
         }
@@ -94,7 +94,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
     
     // MARK: - UITextField Delegate methods
     
-    // Return button on soft keyboard
+    // Return button enabled on soft keyboard to dismiss the keyboard
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
@@ -111,7 +111,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
     internal func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!){
         if error == nil && !result.isCancelled {
             myActivityIndicator.startAnimating()
-            udacityClient.loginToUdacityWithFacebook(FBSDKAccessToken.currentAccessToken().tokenString, completionHandlerForLogin: loginToMapClosure)
+            udacityClient.loginToUdacityWithFacebook(FBSDKAccessToken.currentAccessToken().tokenString, completionHandlerForLogin: loginToMapViewClosure)
         } else {
             result.isCancelled ?
                 self.displayAlertWindow("Login Error", msg: "Cancelled Facebook Login,\n Supply Udacity Credentials" , actions: [self.dismissAction()])

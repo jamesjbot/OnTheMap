@@ -19,9 +19,7 @@ class InformationPostingController: UIViewController , UITextViewDelegate {
     // MARK: - IB elements
     
     @IBOutlet weak var findOnTheMapButton: UIButton!
-    
     @IBOutlet weak var locationString: UITextView!
-    
     @IBOutlet weak var myActivityIndicator: UIActivityIndicatorView!
     
     
@@ -64,7 +62,7 @@ class InformationPostingController: UIViewController , UITextViewDelegate {
         }// end of geocoder completion handler
     }
     
-    // This passes information to the SubmitViewController so this is for forward segue
+    // This Uses Depdency injector pattern to send information to the SubmitViewController
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.destinationViewController is SubmitViewController {
             let referenceToSubmitView = segue.destinationViewController as! SubmitViewController
@@ -84,7 +82,7 @@ class InformationPostingController: UIViewController , UITextViewDelegate {
         }
     }
     
-    
+    // This clears the textView when the user begins editting the text view
     func textViewShouldBeginEditing(textView: UITextView) -> Bool {
         textView.text = ""
         return true
