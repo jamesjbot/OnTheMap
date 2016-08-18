@@ -15,7 +15,7 @@ class MyMapViewController: UIViewController, UINavigationBarDelegate, MKMapViewD
     
     var locations: [StudentInformation] = [StudentInformation]()
     let model = Model.sharedInstance()
-    
+
     // MARK: - IB elements
     
     @IBOutlet weak var myActivityIndicator: UIActivityIndicatorView!

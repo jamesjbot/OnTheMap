@@ -24,6 +24,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
     // MARK: - Variables
     
     var fbLoginManager: FBSDKLoginManager!
+    let udacityLoginURL = "https://www.udacity.com/account/auth#!/signup"
     
     // MARK: - IBActions
     
@@ -41,6 +42,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
             udacityClient.loginToUdacityWithFacebook(FBSDKAccessToken.currentAccessToken().tokenString, completionHandlerForLogin: loginToMapClosure)
         }
         
+    }
+    
+    @IBAction func signUp2Udacity(sender: AnyObject) {
+        let url = udacityLoginURL
+        openURL(url)
     }
     
     // MARK: - Closure Expressions
