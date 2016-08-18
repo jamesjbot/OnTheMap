@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import FBSDKLoginKit
+import FBSDKCoreKit
 
 class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate {
     
@@ -20,27 +21,40 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
     @IBOutlet weak var myActivityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var facebookButton: FBSDKLoginButton!
     
+    // MARK: - Variables
+    
+    var fbLoginManager: FBSDKLoginManager!
     
     // MARK: - IBActions
     
+    // Target of Logout Unwinding
     @IBAction func unwindToLoginReceiver(segue:UIStoryboardSegue){
     }
     
+    
+    // Responds to presses on login button
     @IBAction func attempToLogin(sender: AnyObject) {
         myActivityIndicator.startAnimating()
-        udacityClient.loginToUdacity(usernameTextField.text!, password: passwordTextField.text!) {
-            (success, error) -> Void in
-            self.stopAnimating()
-            if success == true {
-                performUIUpdatesOnMain {
-                    self.performSegueWithIdentifier("LoginToMap", sender: self)
-                }
-            } else { // There is an error
-                self.displayAlertWindow("Login Error", msg: "Error logging in\nPlease try again" , actions: [self.dismissAction()])
-            }
+        if FBSDKAccessToken.currentAccessToken() == nil {
+            udacityClient.loginToUdacity(usernameTextField.text!, password: passwordTextField.text!,completionHandlerForLogin: loginToMapClosure)
+        } else {
+            udacityClient.loginToUdacityWithFacebook(FBSDKAccessToken.currentAccessToken().tokenString, completionHandlerForLogin: loginToMapClosure)
         }
+        
     }
     
+    // MARK: - Closure Expressions
+    
+    func loginToMapClosure(success: Bool?,error: NSError?) -> Void {
+        self.stopAnimating()
+        if success == true {
+            performUIUpdatesOnMain {
+                self.performSegueWithIdentifier("LoginToMap", sender: self)
+            }
+        } else { // There is an error
+            self.displayAlertWindow("Login Error", msg: "Error logging in\nPlease try again" , actions: [self.dismissAction()])
+        }
+    }
     
     // MARK: - Functions
     
@@ -61,9 +75,16 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
         
         // Add facebook login
         facebookButton.delegate = self
-
+        fbLoginManager = FBSDKLoginManager()
     }
     
+    override func viewWillAppear(b: Bool){
+        super.viewWillAppear(b)
+        // When Facebook is logged in we should only present the option to continue with facebook login on the login button as per Single Sign On style.
+        if FBSDKAccessToken.currentAccessToken() != nil {
+            loginButton.setTitle("Continue with Facebook Login", forState: UIControlState.Normal)
+        }
+    }
     
     // MARK: - UITextField Delegate methods
     
@@ -73,8 +94,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
         return false
     }
     
-    
     // MARK: - Facebook Login Delegate methods
+    
     /*!
     @abstract Sent to the delegate when the button was used to login.
     @param loginButton the sender
@@ -82,21 +103,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
     @param error The error (if any) from the login
     */
     internal func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!){
-        print("Logged into facebook successfully")
-        print("The result is\(FBSDKAccessToken.currentAccessToken())")
-        myActivityIndicator.startAnimating()
-        udacityClient.loginToUdacityWithFacebook(FBSDKAccessToken.currentAccessToken().tokenString) {
-            (success, error) -> Void in
-            self.stopAnimating()
-            if success == true {
-                performUIUpdatesOnMain {
-                    self.performSegueWithIdentifier("LoginToMap", sender: self)
-                }
-            } else { // There is an error
-                self.displayAlertWindow("Login Error", msg: "Error logging in\nPlease try again" , actions: [self.dismissAction()])
-            }
+        if error == nil && !result.isCancelled {
+            myActivityIndicator.startAnimating()
+            udacityClient.loginToUdacityWithFacebook(FBSDKAccessToken.currentAccessToken().tokenString, completionHandlerForLogin: loginToMapClosure)
+        } else {
+            result.isCancelled ?
+                self.displayAlertWindow("Login Error", msg: "Cancelled Facebook Login,\n Supply Udacity Credentials" , actions: [self.dismissAction()])
+                : self.displayAlertWindow("Login Error", msg: "Error logging in with Facebook\nPlease try again" , actions: [self.dismissAction()])
         }
-
         
     }
     
@@ -105,14 +119,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
     @param loginButton The button that was clicked.
     */
     internal func loginButtonDidLogOut(loginButton: FBSDKLoginButton!){
-        print("Logged out of facebook succcessfully")
+        // Change the Login button back to normal and logout of Facebook
+        self.loginButton.setTitle("Login", forState: UIControlState.Normal)
+        FBSDKLoginManager().logOut()
     }
     
-    /*!
-    @abstract Sent to the delegate when the button is about to login.
-    @param loginButton the sender
-    @return YES if the login should be allowed to proceed, NO otherwise
-    */
-    //optional public func loginButtonWillLogin(loginButton: FBSDKLoginButton!) -> Bool
     
 }
