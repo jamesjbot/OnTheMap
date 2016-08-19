@@ -81,15 +81,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
         
         // Add facebook loginbutton relationships
         facebookButton.delegate = self
-        fbLoginManager = FBSDKLoginManager()
+        facebookButton.readPermissions = ["public_profile"]
+
     }
     
     override func viewWillAppear(b: Bool){
         super.viewWillAppear(b)
-        // When Facebook is logged in we should only present the option to continue with facebook login on the login button. If the use wants to logout of facebook and use the regular login they can
-        if FBSDKAccessToken.currentAccessToken() != nil {
-            loginButton.setTitle("Continue with Facebook Login", forState: UIControlState.Normal)
-        }
     }
     
     // MARK: - UITextField Delegate methods
@@ -125,8 +122,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
     @param loginButton The button that was clicked.
     */
     internal func loginButtonDidLogOut(loginButton: FBSDKLoginButton!){
-        // Change the Login button back to normal and logout of Facebook
-        self.loginButton.setTitle("Login", forState: UIControlState.Normal)
         FBSDKLoginManager().logOut()
     }
     

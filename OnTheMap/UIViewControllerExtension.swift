@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FBSDKLoginKit
 
 extension UIViewController {
     
@@ -28,9 +29,14 @@ extension UIViewController {
             if error != nil {
                 self.displayAlertWindow("Failure to Logout", msg: "(error?.localizedDescription)!\n Please Try Again", actions: [self.dismissAction()])
                 return
+            } else { // Success
+                performUIUpdatesOnMain{
+                    FBSDKLoginManager().logOut()
+                    self.unwindToLoginInitiation()
+                }
             }
-            self.unwindToLoginInitiation()
         }
+
     }
     
     
