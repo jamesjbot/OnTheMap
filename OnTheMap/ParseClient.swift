@@ -168,7 +168,7 @@ class ParseClient {
     }
     
     // Update the student's informatin timestamp
-    func updatedOurStudentInforamtionUpdatedAtTime(var inputStudent: StudentInformation, updateTime: String){
+    func updatedOurStudentInforamtionUpdatedAtTime(inputStudent: StudentInformation, updateTime: String){
         // Update the isolated version
         inputStudent.updatedAt = updateTime
         Model.sharedInstance().setThisStudent(inputStudent)
