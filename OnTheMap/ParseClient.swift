@@ -170,13 +170,14 @@ class ParseClient {
     // Update the student's informatin timestamp
     func updatedOurStudentInforamtionUpdatedAtTime(inputStudent: StudentInformation, updateTime: String){
         // Update the isolated version
-        inputStudent.updatedAt = updateTime
-        Model.sharedInstance().setThisStudent(inputStudent)
+        var updatedStudent = inputStudent
+        updatedStudent.updatedAt = updateTime
+        Model.sharedInstance().setThisStudent(updatedStudent)
         // Update the annotated version
         var allStudents = Model.sharedInstance().getStudents()
         for (index,info) in allStudents.enumerate(){
-            if info.objectId == inputStudent.objectId {
-                allStudents[index] = inputStudent
+            if info.objectId == updatedStudent.objectId {
+                allStudents[index] = updatedStudent
             }
         }
         Model.sharedInstance().setStudents(allStudents)
