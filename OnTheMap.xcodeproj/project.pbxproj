@@ -26,6 +26,7 @@
 		A7790B401D658B2D0051F756 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7790B3D1D658B2D0051F756 /* FBSDKCoreKit.framework */; };
 		A780FC5B1CD50BA500A60FA9 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A780FC5A1CD50BA500A60FA9 /* ListViewController.swift */; };
 		A78BEF141CEAE1AA00DF5D26 /* MyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78BEF131CEAE1AA00DF5D26 /* MyTableViewCell.swift */; };
+		A79911531D6B012500A48242 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A79911521D6B012500A48242 /* Bolts.framework */; };
 		A7A96F781CD7EA9900D83CF0 /* MyMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A96F771CD7EA9900D83CF0 /* MyMapViewController.swift */; };
 		A7A96F7D1CD7ED6000D83CF0 /* UdacityLoginClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A96F7C1CD7ED6000D83CF0 /* UdacityLoginClient.swift */; };
 		A7A9F78A1D0CBAD1008B4C49 /* ParseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A9F7891D0CBAD1008B4C49 /* ParseConstants.swift */; };
@@ -77,6 +78,7 @@
 		A7790B3D1D658B2D0051F756 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = OnTheMap/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		A780FC5A1CD50BA500A60FA9 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		A78BEF131CEAE1AA00DF5D26 /* MyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTableViewCell.swift; sourceTree = "<group>"; };
+		A79911521D6B012500A48242 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "../../FacebookSDKs-iOS-4/Bolts.framework"; sourceTree = "<group>"; };
 		A7A96F771CD7EA9900D83CF0 /* MyMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMapViewController.swift; sourceTree = "<group>"; };
 		A7A96F7C1CD7ED6000D83CF0 /* UdacityLoginClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityLoginClient.swift; sourceTree = "<group>"; };
 		A7A9F7891D0CBAD1008B4C49 /* ParseConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseConstants.swift; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 				A7790B3F1D658B2D0051F756 /* FBSDKLoginKit.framework in Frameworks */,
 				A7790B401D658B2D0051F756 /* FBSDKCoreKit.framework in Frameworks */,
 				A7790B3E1D658B2D0051F756 /* FBSDKShareKit.framework in Frameworks */,
+				A79911531D6B012500A48242 /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,6 +127,7 @@
 		A73BF3561D62CDD900ACF60B /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				A79911521D6B012500A48242 /* Bolts.framework */,
 				A7790B3B1D658B2D0051F756 /* FBSDKShareKit.framework */,
 				A7790B3C1D658B2D0051F756 /* FBSDKLoginKit.framework */,
 				A7790B3D1D658B2D0051F756 /* FBSDKCoreKit.framework */,
@@ -471,6 +475,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "/Users/jamesjongs/Desktop/FacebookSDKs-iOS-4/";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -485,9 +490,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LIBRARY_SEARCH_PATHS = "/Users/jamesjongs/Desktop/FacebookSDKs-iOS-4/**";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				"OTHER_LDFLAGS[arch=*]" = "-v";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -515,6 +522,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "/Users/jamesjongs/Desktop/FacebookSDKs-iOS-4/**";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -523,8 +531,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				"LIBRARY_SEARCH_PATHS[arch=*]" = "/Users/jamesjongs/Desktop/FacebookSDKs-iOS-4/Bolts.framework";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				"OTHER_LDFLAGS[arch=*]" = "-v";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -588,6 +598,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = OnTheMapTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				"OTHER_LDFLAGS[arch=*]" = "";
 				PRODUCT_BUNDLE_IDENTIFIER = JamesJongs.OnTheMapTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OnTheMap.app/OnTheMap";

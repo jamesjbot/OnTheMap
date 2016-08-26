@@ -79,6 +79,7 @@ class SubmitViewController: UIViewController, MKMapViewDelegate, UITextFieldDele
         myMapView.showAnnotations([annotation as MKAnnotation], animated: true)
 
         // Zoom to a comfortable level
+        if previousAnnotationPresent 
         let span = MKCoordinateSpanMake(5, 5)
         let region = MKCoordinateRegion(center: annotation.coordinate, span: span)
         myMapView.setRegion(region, animated: true)

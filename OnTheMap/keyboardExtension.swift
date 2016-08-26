@@ -29,7 +29,7 @@ extension UIViewController {
                 var countUITextfields = 0
                 for stackcell in uiStackViewSubview.subviews {
                     guard stackcell is UITextField else { continue }
-                    countUITextfields++
+                    countUITextfields += 1
                     guard countUITextfields == 2 else { continue }
                     let bottom = stackcell.frame.maxY + uiStackViewSubview.frame.minY // bottom + stackviewoffset
                     if ( countUITextfields == 2 ) && ( CGFloat(topedgeofkeyboard) < bottom ) {
