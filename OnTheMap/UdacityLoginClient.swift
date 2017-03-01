@@ -13,23 +13,28 @@ class UdacityLoginClient {
     
     // MARK:  Variables
     
-    private var uniqueKey: String = ""
-    private var logAgain: String = "\nPlease Login Again"
-    private var model = Model.sharedInstance()
-    private var thisStudentInformation: StudentInformation = Model.sharedInstance().getThisStudent()
+    fileprivate var uniqueKey: String = ""
+    fileprivate var logAgain: String = "\nPlease Login Again"
+    fileprivate var model = Model.sharedInstance()
+    fileprivate var thisStudentInformation: StudentInformation = Model.sharedInstance().getThisStudent()
     
     // MARK: Functions
     
     // Will create a login Session with udacity and pull any Udacity user public information
-    func loginToUdacity(username: String, password: String, completionHandlerForLogin: (requestSuccess: Bool?, error: NSError? )-> Void) {
-        let request = NSMutableURLRequest(URL: NSURL(string: "\(Constants.UdacityURL)\(Methods.Session)")!)
-        request.HTTPMethod = "POST"
+    func loginToUdacity(_ username: String, password: String, completionHandlerForLogin: @escaping (_ requestSuccess: Bool?, _ error: NSError? )-> Void) {
+        let request = NSMutableURLRequest(url: URL(string: "\(Constants.UdacityURL)\(Methods.Session)")!)
+        request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.HTTPBody = "{\"udacity\": {\"username\": \"\(username)\", \"password\": \"\(password)\"}}".dataUsingEncoding(NSUTF8StringEncoding)
-        let session = NSURLSession.sharedSession()
-        let task = session.dataTaskWithRequest(request) { data, response, error in
-            self.guardChecks(data,response: response, error: error) {
+        request.httpBody = "{\"udacity\": {\"username\": \"\(username)\", \"password\": \"\(password)\"}}".data(using: String.Encoding.utf8)
+        let session = URLSession.shared
+        let req = request as URLRequest
+//        let t = session.dataTask(with: req) {
+//            (data,resp,err) -> Void in
+//        }
+        let task = session.dataTask(with: req as URLRequest) {
+            (data: Data?, response: URLResponse?, error: Error?) -> Void in
+            self.guardChecks(data,response: response, error: error as NSError?) {
                 (success, error) -> Void in
                 if success == true {
                     // Parsing data
@@ -43,12 +48,12 @@ class UdacityLoginClient {
                             Model.sharedInstance().setThisStudent(self.thisStudentInformation)
                             self.getUserPublicData(completionHandlerForLogin)
                         } else {
-                            completionHandlerForLogin(requestSuccess: false, error: error)
+                            completionHandlerForLogin(false, error)
                             return
                         }
                     }
                 } else {
-                    completionHandlerForLogin(requestSuccess: false, error: error)
+                    completionHandlerForLogin(false, error)
                     return
                 }
             }
@@ -57,15 +62,16 @@ class UdacityLoginClient {
     }
     
     // Method to login with Facebook access token
-    func loginToUdacityWithFacebook(token: String, completionHandlerForLogin: (requestSuccess:Bool?,error: NSError?)-> Void){
-        let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/session")!)
-        request.HTTPMethod = "POST"
+    func loginToUdacityWithFacebook(_ token: String, completionHandlerForLogin: @escaping (_ requestSuccess:Bool?,_ error: NSError?)-> Void){
+        let request = NSMutableURLRequest(url: URL(string: "https://www.udacity.com/api/session")!)
+        request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.HTTPBody = "{\"facebook_mobile\": {\"access_token\": \"\(token)\"}}".dataUsingEncoding(NSUTF8StringEncoding)
-        let session = NSURLSession.sharedSession()
-        let task = session.dataTaskWithRequest(request) { data, response, error in
-            self.guardChecks(data,response: response, error: error) {
+        request.httpBody = "{\"facebook_mobile\": {\"access_token\": \"\(token)\"}}".data(using: String.Encoding.utf8)
+        let session = URLSession.shared
+        let task = session.dataTask(with: request as URLRequest, completionHandler: {
+            (data: Data?, response: URLResponse?, error: Error?) -> Void in
+            self.guardChecks(data,response: response, error: error as NSError?) {
                 (success, error) -> Void in
                 if success == true {
                     // Parsing data
@@ -79,51 +85,52 @@ class UdacityLoginClient {
                             Model.sharedInstance().setThisStudent(self.thisStudentInformation)
                             self.getUserPublicData(completionHandlerForLogin)
                         } else {
-                            completionHandlerForLogin(requestSuccess: false, error: error)
+                            completionHandlerForLogin(false, error)
                             return
                         }
                     }
                 } else {
-                    completionHandlerForLogin(requestSuccess: false, error: error)
+                    completionHandlerForLogin(false, error)
                     return
                 }
             }
-        }
+        }) 
         task.resume()
     }
     
     
-    func logOutOfUdacity(presentingView:UIViewController, completionHandlerForLogout: (requestSuccess: Bool?, error: NSError?)-> Void){
-        let request = NSMutableURLRequest(URL: NSURL(string: "\(Constants.UdacityURL)\(Methods.Session)")!)
-        request.HTTPMethod = "DELETE"
-        var xsrfCookie: NSHTTPCookie? = nil
-        let sharedCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+    func logOutOfUdacity(_ presentingView:UIViewController, completionHandlerForLogout: @escaping (_ requestSuccess: Bool?, _ error: NSError?)-> Void){
+        let request = NSMutableURLRequest(url: URL(string: "\(Constants.UdacityURL)\(Methods.Session)")!)
+        request.httpMethod = "DELETE"
+        var xsrfCookie: HTTPCookie? = nil
+        let sharedCookieStorage = HTTPCookieStorage.shared
         for cookie in sharedCookieStorage.cookies! {
             if cookie.name == "XSRF-TOKEN" { xsrfCookie = cookie }
         }
         if let xsrfCookie = xsrfCookie {
             request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
         }
-        let session = NSURLSession.sharedSession()
-        let task = session.dataTaskWithRequest(request) { data, response, error in
-            self.guardChecks(data,response: response, error: error) {
+        let session = URLSession.shared
+        let task = session.dataTask(with: request as URLRequest, completionHandler: {
+            (data: Data?, response: URLResponse?, error: Error?) -> Void in
+            self.guardChecks(data,response: response, error: error as NSError?) {
                 (success, error) -> Void in
                 if success == true {
                     // Parsing data
                     self.parseResult(data) {dict, error in
                         if error == nil{
-                            completionHandlerForLogout(requestSuccess: true, error: nil)
+                            completionHandlerForLogout(true, nil)
                         } else {
-                            completionHandlerForLogout(requestSuccess: false, error: error)
+                            completionHandlerForLogout(false, error)
                             return
                         }
                     }
                 } else {
-                    completionHandlerForLogout(requestSuccess: false, error: error)
+                    completionHandlerForLogout(false, error)
                     return
                 }
             }
-        }
+        }) 
         task.resume()
         
     }
@@ -132,11 +139,12 @@ class UdacityLoginClient {
     // MARK: Get User Public Data From Udacity
     
     // Function to GET the user public data from udacity
-    func getUserPublicData(completionHandlerForPublicData: (requestSuccess: Bool?, error: NSError? )-> Void){
-        let request = NSMutableURLRequest(URL: NSURL(string: "\(Constants.UdacityURL)\(Methods.Users)/\(uniqueKey)")!)
-        let session = NSURLSession.sharedSession()
-        let task = session.dataTaskWithRequest(request) { data, response, error in
-            self.guardChecks(data,response: response, error: error){
+    func getUserPublicData(_ completionHandlerForPublicData: @escaping (_ requestSuccess: Bool?, _ error: NSError? )-> Void){
+        let request = NSMutableURLRequest(url: URL(string: "\(Constants.UdacityURL)\(Methods.Users)/\(uniqueKey)")!)
+        let session = URLSession.shared
+        let task = session.dataTask(with: request as URLRequest, completionHandler: {
+            (data: Data?, response: URLResponse?, error: Error?) -> Void in
+            self.guardChecks(data,response: response, error: error as NSError?){
                 (success, error)-> Void in
                 // Parsing data
                 if success == true {
@@ -148,40 +156,41 @@ class UdacityLoginClient {
                             self.thisStudentInformation.lastName = lastname
                             self.thisStudentInformation.firstName = firstname
                             Model.sharedInstance().setThisStudent(self.thisStudentInformation)
-                            completionHandlerForPublicData(requestSuccess: true, error: nil)
+                            completionHandlerForPublicData(true, nil)
                             return
                         } else {
-                            completionHandlerForPublicData(requestSuccess: false, error: error)
+                            completionHandlerForPublicData(false, error)
                             return
                         }
                     }
                 } else {
-                    completionHandlerForPublicData(requestSuccess: false, error: error)
+                    completionHandlerForPublicData(false, error)
                 }
             }
-        }
+        }) 
         task.resume()
     }
     
-    private func parseResult(data: NSData?, completionHandlerForParsingData: (parsedDictionary: NSDictionary?, error: NSError?)-> Void) {
-        let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5)) /* subset response data! */
+    fileprivate func parseResult(_ data: Data?, completionHandlerForParsingData: (_ parsedDictionary: NSDictionary?, _ error: NSError?)-> Void) {
+        let range = NSMakeRange(5, data!.count - 5)
+        let newData = data!.subdata(in: range.toRange()!)/* subset response data! */
         var parsedResult: NSDictionary
         do {
-            parsedResult = try NSJSONSerialization.JSONObjectWithData(newData, options: .AllowFragments) as! NSDictionary
-            completionHandlerForParsingData(parsedDictionary: parsedResult, error: nil)
+            parsedResult = try JSONSerialization.jsonObject(with: newData, options: .allowFragments) as! NSDictionary
+            completionHandlerForParsingData(parsedResult, nil)
             return
         } catch {
-            let userInfo : [NSObject:AnyObject]? = [NSLocalizedDescriptionKey: "Error Parsing User Information\(logAgain)"]
-            completionHandlerForParsingData(parsedDictionary: nil, error: NSError(domain: "parseResult", code: 1, userInfo: userInfo))
+            let userInfo : [AnyHashable: Any]? = [NSLocalizedDescriptionKey: "Error Parsing User Information\(logAgain)"]
+            completionHandlerForParsingData(nil, NSError(domain: "parseResult", code: 1, userInfo: userInfo))
             return
         }
     }
     
-    private func guardChecks(data: NSData?, response: NSURLResponse?, error: NSError?, completionHandlerForGuardChecks: (requestSuccess: Bool?, error: NSError?)-> Void){
+    fileprivate func guardChecks(_ data: Data?, response: URLResponse?, error: NSError?, completionHandlerForGuardChecks: @escaping (_ requestSuccess: Bool?, _ error: NSError?)-> Void){
         
-        func sendError(error: String) {
+        func sendError(_ error: String) {
             let userInfo = [NSLocalizedDescriptionKey : error]
-            completionHandlerForGuardChecks(requestSuccess: false, error: NSError(domain: "loginToUdacity", code: 1, userInfo: userInfo))
+            completionHandlerForGuardChecks(false, NSError(domain: "loginToUdacity", code: 1, userInfo: userInfo))
         }
         
         // GUARD: For any error
@@ -191,13 +200,13 @@ class UdacityLoginClient {
         }
         
         // GUARD: There was no error from server; however server did not take further action
-        guard let statuscode: Int = (response as! NSHTTPURLResponse).statusCode where statuscode != 403 else {
+        guard let statuscode: Int = (response as! HTTPURLResponse).statusCode , statuscode != 403 else {
             sendError("Invalid login credentials \(logAgain)")
             return
         }
         
         // GUARD: Did we get successful 2XX response?
-        guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
+        guard let statusCode = (response as? HTTPURLResponse)?.statusCode , statusCode >= 200 && statusCode <= 299 else {
             sendError("There was an error logging in\(logAgain)")
             return
         }
@@ -208,12 +217,12 @@ class UdacityLoginClient {
             return
         }
         
-        completionHandlerForGuardChecks(requestSuccess: true, error: nil)
+        completionHandlerForGuardChecks(true, nil)
     }
     
     
     // MARK: - Singleton Implementation
-    private init(){}
+    fileprivate init(){}
     
     class func sharedInstance()-> UdacityLoginClient{
         struct Singleton {

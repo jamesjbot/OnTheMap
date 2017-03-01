@@ -25,12 +25,12 @@ class InformationPostingController: UIViewController , UITextViewDelegate {
     
     // MARK: - IBActions
     
-    @IBAction func findOnMapPressed(sender: AnyObject) {
+    @IBAction func findOnMapPressed(_ sender: AnyObject) {
         if locationString.text == "Enter Your Location Here" || locationString.text == "" {
             performUIUpdatesOnMain {
-                let alertwindow:UIAlertController = UIAlertController(title: "", message: "You Must Enter a Location", preferredStyle: UIAlertControllerStyle.Alert)
-                alertwindow.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
-                self.presentViewController(alertwindow, animated: true, completion: nil)
+                let alertwindow:UIAlertController = UIAlertController(title: "", message: "You Must Enter a Location", preferredStyle: UIAlertControllerStyle.alert)
+                alertwindow.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alertwindow, animated: true, completion: nil)
             }
         } else {
             encodeAddress(locationString.text)
@@ -44,11 +44,11 @@ class InformationPostingController: UIViewController , UITextViewDelegate {
         super.viewDidLoad()
         self.locationString.delegate = self
         // Increase the size of Spinner
-        myActivityIndicator.transform = CGAffineTransformMakeScale(5, 5)        
+        myActivityIndicator.transform = CGAffineTransform(scaleX: 5, y: 5)        
         subscribeToKeyboardShowNotifications()
     }
     
-    func encodeAddress(input:String) {
+    func encodeAddress(_ input:String) {
         myActivityIndicator.startAnimating()
         CLGeocoder().geocodeAddressString(input) { (placemarksarray, error) -> Void in
             self.myActivityIndicator.stopAnimating()
@@ -57,15 +57,15 @@ class InformationPostingController: UIViewController , UITextViewDelegate {
             } else {
                 let placemark: CLPlacemark = placemarksarray![0] as CLPlacemark
                 self.ipcCoordinate = placemark.location!.coordinate
-                self.performSegueWithIdentifier("continuetolink", sender: self)
+                self.performSegue(withIdentifier: "continuetolink", sender: self)
             }
         }// end of geocoder completion handler
     }
     
     // This Uses Depdency injector pattern to send information to the SubmitViewController
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.destinationViewController is SubmitViewController {
-            let referenceToSubmitView = segue.destinationViewController as! SubmitViewController
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.destination is SubmitViewController {
+            let referenceToSubmitView = segue.destination as! SubmitViewController
             referenceToSubmitView.incomingCoordinate = ipcCoordinate
             referenceToSubmitView.locationString = self.locationString.text
         }
@@ -73,7 +73,7 @@ class InformationPostingController: UIViewController , UITextViewDelegate {
     
     
     // MARK: UITextViewDelegate methods
-    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if (text == "\n") { //new line
             textView.resignFirstResponder()
             return false
@@ -83,7 +83,7 @@ class InformationPostingController: UIViewController , UITextViewDelegate {
     }
     
     // This clears the textView when the user begins editting the text view
-    func textViewShouldBeginEditing(textView: UITextView) -> Bool {
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         textView.text = ""
         return true
     }

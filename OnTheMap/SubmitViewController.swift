@@ -33,7 +33,7 @@ class SubmitViewController: UIViewController, MKMapViewDelegate, UITextFieldDele
     
     // #MARK: - IBActions
     
-    @IBAction func submit(sender: UIButton) {
+    @IBAction func submit(_ sender: UIButton) {
         myActivityIndicator.startAnimating()
         // Get the last instance of this students informatin and update position, link, and display text
         var passableStudentInformation: StudentInformation = Model.sharedInstance().getThisStudent()
@@ -71,7 +71,7 @@ class SubmitViewController: UIViewController, MKMapViewDelegate, UITextFieldDele
         super.viewDidLoad()
         linkTextField.delegate = self
         // Increase the size of Spinner
-        myActivityIndicator.transform = CGAffineTransformMakeScale(5, 5)
+        myActivityIndicator.transform = CGAffineTransform(scaleX: 5, y: 5)
         let annotation = MKPointAnnotation()
         if incomingCoordinate != nil {
             annotation.coordinate = incomingCoordinate
@@ -79,7 +79,6 @@ class SubmitViewController: UIViewController, MKMapViewDelegate, UITextFieldDele
         myMapView.showAnnotations([annotation as MKAnnotation], animated: true)
 
         // Zoom to a comfortable level
-        if previousAnnotationPresent 
         let span = MKCoordinateSpanMake(5, 5)
         let region = MKCoordinateRegion(center: annotation.coordinate, span: span)
         myMapView.setRegion(region, animated: true)
@@ -87,15 +86,15 @@ class SubmitViewController: UIViewController, MKMapViewDelegate, UITextFieldDele
     
     
     // Exit to last annotation display
-    private func exitToAnnotation() {
+    fileprivate func exitToAnnotation() {
         performUIUpdatesOnMain {
-            self.performSegueWithIdentifier(ParseClient.Constants.ReturnToAnnotationDisplay, sender: nil)
+            self.performSegue(withIdentifier: ParseClient.Constants.ReturnToAnnotationDisplay, sender: nil)
         }
     }
     
     
     // MARK: - Function to help stop animating on completionHandlers
-    private func stopAnimating(){
+    fileprivate func stopAnimating(){
         performUIUpdatesOnMain(){()-> Void in
             self.myActivityIndicator.stopAnimating()
         }
@@ -103,14 +102,14 @@ class SubmitViewController: UIViewController, MKMapViewDelegate, UITextFieldDele
     
     
     // MARK: - Mapview Delegate method
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let reuseId = "pin"
-        var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
         if pinView == nil {
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             pinView!.canShowCallout = true
-            pinView!.pinTintColor = UIColor.redColor()
-            pinView!.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
+            pinView!.pinTintColor = UIColor.red
+            pinView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
         }
         else {
             pinView!.annotation = annotation
@@ -121,7 +120,7 @@ class SubmitViewController: UIViewController, MKMapViewDelegate, UITextFieldDele
     // MARK: - UITextField Delegate methods
     
     // Return button on soft keyboard
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
     }

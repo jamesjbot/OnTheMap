@@ -12,35 +12,36 @@ class ParseClient {
     
     // MARK: Variables
     
-    private var parseLocations: [[String : AnyObject]] = [[String : AnyObject]]()
-    private var model = Model.sharedInstance()
+    fileprivate var parseLocations: [[String : AnyObject]] = [[String : AnyObject]]()
+    fileprivate var model = Model.sharedInstance()
     
     // MARK: Functions
     
     // MARK: Convenience functions to help create url requests
     
-    func formatRequest(request: NSMutableURLRequest, student: StudentInformation){
+    func formatRequest(_ request: NSMutableURLRequest, student: StudentInformation){
         formatRequestHeaders(request)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         let bodyString: String = "{\"uniqueKey\": \"\(student.uniqueKey)\", \"firstName\": \"\(student.firstName)\", \"lastName\": \"\(student.lastName)\",\"mapString\": \"\(student.mapString)\", \"mediaURL\": \"\(student.mediaURL)\",\"latitude\": \(student.latitude), \"longitude\": \(student.longitude)}"
-        request.HTTPBody = bodyString.dataUsingEncoding(NSUTF8StringEncoding)
+        request.httpBody = bodyString.data(using: String.Encoding.utf8)
     }
     
-    func formatRequestHeaders(request: NSMutableURLRequest){
+    func formatRequestHeaders(_ request: NSMutableURLRequest){
         request.addValue(Constants.ApplicationID, forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue(Constants.RestAPIKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
     }
     
     // This function tells the view controller whether or not this student already has a location entry, this should just tell the viewcontroller whether or not present a warning
-    func getThisStudentLocation(input: String, completionHandlerForGetThisStudentLocation: (success: Bool, present: Bool? ,error: NSError?) -> Void ){
+    func getThisStudentLocation(_ input: String, completionHandlerForGetThisStudentLocation: @escaping (_ success: Bool, _ present: Bool? ,_ error: NSError?) -> Void ){
         let urlString = "\(Constants.URL)/StudentLocation?where=%7B%22uniqueKey%22%3A%22\(input)%22%7D"
-        let url = NSURL(string: urlString)
-        let request = NSMutableURLRequest(URL: url!)
+        let url = URL(string: urlString)
+        let request = NSMutableURLRequest(url: url!)
         formatRequestHeaders(request)
-        let session = NSURLSession.sharedSession()
-        let task = session.dataTaskWithRequest(request) { data, response, error in
-            
-            self.guardChecks(data, response: response, error: error) {
+        let session = URLSession.shared
+
+        let task = session.dataTask(with: request as URLRequest) {
+            (data: Data?, response: URLResponse?, error: Error?) -> Void in
+            self.guardChecks(data, response: response, error: error as NSError?) {
                 (success, error) -> Void in
                 if success {
                     self.parseResult(data) {
@@ -48,30 +49,31 @@ class ParseClient {
                         if error == nil {
                             let arrayDictionaries = dict!["results"] as! NSArray
                             if arrayDictionaries.count != 0 {
-                                completionHandlerForGetThisStudentLocation(success: true, present: true, error: nil)
+                                completionHandlerForGetThisStudentLocation(true, true, nil)
                                 return
                             } else {
-                                completionHandlerForGetThisStudentLocation(success: true, present: false, error: nil)
+                                completionHandlerForGetThisStudentLocation(true, false, nil)
                                 return
                             }
                         } else { // There was a parsing error
-                            completionHandlerForGetThisStudentLocation(success: false, present: nil, error: error)
+                            completionHandlerForGetThisStudentLocation(false, nil, error)
                         }
                     }
                 } else { // there was a guard error
-                    completionHandlerForGetThisStudentLocation(success: false, present: nil, error: error)
+                    completionHandlerForGetThisStudentLocation(false, nil, error)
                 }
             }
         }
         task.resume()
     }
     
-    func getAllStudentLocationsAndRefreshView(completionHandlerFromGetAllStudents:(requestSuccess: Bool,error: NSError?) -> Void ) {
-        let request = NSMutableURLRequest(URL: NSURL(string: "\(Constants.URL)/StudentLocation?\(MethodParameters.Limit100)&\(MethodParameters.ReverseCreationDateOrder)")!)
+    func getAllStudentLocationsAndRefreshView(_ completionHandlerFromGetAllStudents:@escaping (_ requestSuccess: Bool,_ error: NSError?) -> Void ) {
+        let request = NSMutableURLRequest(url: URL(string: "\(Constants.URL)/StudentLocation?\(MethodParameters.Limit100)&\(MethodParameters.ReverseCreationDateOrder)")!)
         formatRequestHeaders(request)
-        let session = NSURLSession.sharedSession()
-        let task = session.dataTaskWithRequest(request) { data, response, error in
-            self.guardChecks(data, response: response, error: error){
+        let session = URLSession.shared
+        let task = session.dataTask(with: request as URLRequest, completionHandler: {
+            (data: Data?, response: URLResponse?, error: Error?) -> Void in
+            self.guardChecks(data, response: response, error: error as? NSError){
                 (requestSuccess, error) -> Void in
                 if requestSuccess {
                         self.parseResult(data) {
@@ -83,39 +85,40 @@ class ParseClient {
                             Model.sharedInstance().deleteAllStudents()
                             for dictionary in self.parseLocations{ // Save the user information seperately
                                 Model.sharedInstance().appendStudent(StudentInformation(id: dictionary))
-                                if (dictionary["uniqueKey"] ?? "")as! String == Model.sharedInstance().getThisStudent().uniqueKey {
+                                if (dictionary["uniqueKey"] as? String ?? "") == Model.sharedInstance().getThisStudent().uniqueKey {
                                     // First and last name were populated when I logged into udacity
                                     var localStudentInfo = Model.sharedInstance().getThisStudent()
-                                    localStudentInfo.latitude = dictionary["latitude"]?.description
-                                    localStudentInfo.longitude = dictionary["longitude"]?.description
-                                    localStudentInfo.mapString = dictionary["mapString"] as! String
-                                    localStudentInfo.mediaURL = dictionary["mediaURL"] as! String
-                                    localStudentInfo.objectId = dictionary["objectId"] as! String
-                                    localStudentInfo.createdAt = dictionary["createdAt"] as! String
-                                    Model.sharedInstance().setThisStudent(localStudentInfo)
+                                    localStudentInfo?.latitude = dictionary["latitude"]?.description
+                                    localStudentInfo?.longitude = dictionary["longitude"]?.description
+                                    localStudentInfo?.mapString = dictionary["mapString"] as! String
+                                    localStudentInfo?.mediaURL = dictionary["mediaURL"] as! String
+                                    localStudentInfo?.objectId = dictionary["objectId"] as! String
+                                    localStudentInfo?.createdAt = dictionary["createdAt"] as! String
+                                    Model.sharedInstance().setThisStudent(localStudentInfo!)
                                 }
                             }
-                            completionHandlerFromGetAllStudents(requestSuccess: true, error: nil)
+                            completionHandlerFromGetAllStudents(true, nil)
                         } else {
-                            completionHandlerFromGetAllStudents(requestSuccess: false, error: error)
+                            completionHandlerFromGetAllStudents(false, error)
                         }
                     } // end of self.parseResult(data)
                 } else { // Guard checks failed
-                    completionHandlerFromGetAllStudents(requestSuccess: false, error: error)
+                    completionHandlerFromGetAllStudents(false, error)
                 }
             } // End of guard checks
-        } // end oftask
+        })  // end oftask
         task.resume()
     }
     
     // Posting student information to server
-    func postThisStudentLocation(student: StudentInformation, completionHandlerForPost: (success: Bool, error: NSError?) ->Void ) {
-        let request = NSMutableURLRequest(URL: NSURL(string: "\(Constants.URL)/StudentLocation")!)
-        request.HTTPMethod = "POST"
+    func postThisStudentLocation(_ student: StudentInformation, completionHandlerForPost: @escaping (_ success: Bool, _ error: NSError?) ->Void ) {
+        let request = NSMutableURLRequest(url: URL(string: "\(Constants.URL)/StudentLocation")!)
+        request.httpMethod = "POST"
         formatRequest(request, student: student)
-        let session = NSURLSession.sharedSession()
-        let task = session.dataTaskWithRequest(request) { data, response, error in
-            self.guardChecks(data, response: response, error: error){
+        let session = URLSession.shared
+        let task = session.dataTask(with: request as URLRequest, completionHandler: {
+            (data: Data?, response: URLResponse?, error: Error?) -> Void in
+            self.guardChecks(data, response: response, error: error as NSError?){
                 (requestSuccess, error) -> Void in
                 if requestSuccess {
                     self.parseResult(data) {
@@ -123,30 +126,31 @@ class ParseClient {
                         if error == nil {
                             let newCreationTime = dict!["createdAt"] as! String
                             self.updatedOurStudentInforamtionUpdatedAtTime(student, updateTime: newCreationTime)
-                            completionHandlerForPost(success: true, error: nil)
+                            completionHandlerForPost(true, nil)
                         } else {
-                            completionHandlerForPost(success: false, error: error)
+                            completionHandlerForPost(false, error)
                         }
                     }
                 } else { // Guard checks failed
-                    completionHandlerForPost(success: false, error: error)
+                    completionHandlerForPost(false, error)
                 }
             }
-        }
+        }) 
         task.resume()
         
     }
     
     // Update this student's location information
-    func updateThisStudentLocation(student: StudentInformation, completionHandlerForUpdate: (success: Bool, error: NSError?) -> Void) {
+    func updateThisStudentLocation(_ student: StudentInformation, completionHandlerForUpdate: @escaping (_ success: Bool, _ error: NSError?) -> Void) {
         let urlString = "\(Constants.URL)/StudentLocation/\(Model.sharedInstance().getThisStudent().objectId)"
-        let url = NSURL(string: urlString)
-        let request = NSMutableURLRequest(URL: url!)
-        request.HTTPMethod = "PUT"
+        let url = URL(string: urlString)
+        let request = NSMutableURLRequest(url: url!)
+        request.httpMethod = "PUT"
         formatRequest(request,student: student)
-        let session = NSURLSession.sharedSession()
-        let task = session.dataTaskWithRequest(request) { data, response, error in
-            self.guardChecks(data, response: response, error: error){
+        let session = URLSession.shared
+        let task = session.dataTask(with: request as URLRequest, completionHandler: {
+            (data: Data?, response: URLResponse?, error: Error?) -> Void in
+            self.guardChecks(data, response: response, error: error as NSError?){
                 (requestSuccess, error) -> Void in
                 if requestSuccess {
                     self.parseResult(data) {
@@ -154,28 +158,28 @@ class ParseClient {
                         if error == nil {
                             let returnUpdatedTime: String = dict!["updatedAt"] as! String
                             self.updatedOurStudentInforamtionUpdatedAtTime(student, updateTime: returnUpdatedTime)
-                            completionHandlerForUpdate(success: true, error: nil)
+                            completionHandlerForUpdate(true, nil)
                         } else {
-                            completionHandlerForUpdate(success: false, error: error)
+                            completionHandlerForUpdate(false, error)
                         }
                     }
                 } else { // Guard checks failed
-                    completionHandlerForUpdate(success: false, error: error)
+                    completionHandlerForUpdate(false, error)
                 }
             }
-        }
+        }) 
         task.resume()
     }
     
     // Update the student's informatin timestamp
-    func updatedOurStudentInforamtionUpdatedAtTime(inputStudent: StudentInformation, updateTime: String){
+    func updatedOurStudentInforamtionUpdatedAtTime(_ inputStudent: StudentInformation, updateTime: String){
         // Update the isolated version
         var updatedStudent = inputStudent
         updatedStudent.updatedAt = updateTime
         Model.sharedInstance().setThisStudent(updatedStudent)
         // Update the annotated version
         var allStudents = Model.sharedInstance().getStudents()
-        for (index,info) in allStudents.enumerate(){
+        for (index,info) in allStudents.enumerated(){
             if info.objectId == updatedStudent.objectId {
                 allStudents[index] = updatedStudent
             }
@@ -184,24 +188,24 @@ class ParseClient {
     }
     
     // Generic parsing function
-    private func parseResult(data: NSData?, completionHandlerForParsingData: (parsedDictionary: NSDictionary?, error: NSError?)-> Void) {
+    fileprivate func parseResult(_ data: Data?, completionHandlerForParsingData: (_ parsedDictionary: NSDictionary?, _ error: NSError?)-> Void) {
         var parsedResult: NSDictionary
         do {
-            parsedResult = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments) as! NSDictionary
-            completionHandlerForParsingData(parsedDictionary: parsedResult, error: nil)
+            parsedResult = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! NSDictionary
+            completionHandlerForParsingData(parsedResult, nil)
             return
         } catch {
-            let userInfo : [NSObject:AnyObject]? = [NSLocalizedDescriptionKey: "Error Parsing Information\nPlease Try again"]
-            completionHandlerForParsingData(parsedDictionary: nil, error: NSError(domain: "ParseClient", code: 1, userInfo: userInfo))
+            let userInfo : [AnyHashable: Any]? = [NSLocalizedDescriptionKey: "Error Parsing Information\nPlease Try again"]
+            completionHandlerForParsingData(nil, NSError(domain: "ParseClient", code: 1, userInfo: userInfo))
             return
         }
     }
     
-    private func guardChecks(data: NSData?, response: NSURLResponse?, error: NSError?, completionHandlerForGuardChecks: (requestSuccess: Bool, error: NSError?)-> Void){
+    fileprivate func guardChecks(_ data: Data?, response: URLResponse?, error: NSError?, completionHandlerForGuardChecks: @escaping (_ requestSuccess: Bool, _ error: NSError?)-> Void){
         
-        func sendError(error: String) {
+        func sendError(_ error: String) {
             let userInfo = [NSLocalizedDescriptionKey : error]
-            completionHandlerForGuardChecks(requestSuccess: false, error: NSError(domain: "ParseClient", code: 1, userInfo: userInfo))
+            completionHandlerForGuardChecks(false, NSError(domain: "ParseClient", code: 1, userInfo: userInfo))
         }
         
         // GUARD: For any error
@@ -211,14 +215,14 @@ class ParseClient {
         }
         
         // GUARD: There was no error from server; however server did not take further action
-        guard (response as! NSHTTPURLResponse).statusCode != 403 else {
+        guard (response as! HTTPURLResponse).statusCode != 403 else {
             sendError("Server not responding to request")
             return
         }
         
         // GUARD: Did we get successful 2XX response?
-        guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
-            sendError("Your request returned a status code other than 2xx \((response as? NSHTTPURLResponse)!.statusCode)")
+        guard let statusCode = (response as? HTTPURLResponse)?.statusCode , statusCode >= 200 && statusCode <= 299 else {
+            sendError("Your request returned a status code other than 2xx \((response as? HTTPURLResponse)!.statusCode)")
             return
         }
         
@@ -228,11 +232,11 @@ class ParseClient {
             return
         }
         
-        completionHandlerForGuardChecks(requestSuccess: true, error: nil)
+        completionHandlerForGuardChecks(true, nil)
     }
     
     // MARK: - Singleton Implementation
-    private init(){}
+    fileprivate init(){}
     
     class func sharedInstance() -> ParseClient {
         struct Singleton {

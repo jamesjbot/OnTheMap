@@ -17,37 +17,13 @@ extension UIViewController {
      // MARK: - Keyboard elevating functions
      
      // Generates a keyboard height for the bottom textfield, generates 0 for top textfield
-    func getKeyboardHeight(notification:NSNotification) -> CGFloat {
-        let keyboardSize = notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue// of CGRect
-        /** For the login view controller we do not want to move by the full height just enough to clear editable fields so save the stackview's offset and calculate the edge of the lowest editable UITextfield
-        then accomodate the keyboard
-        **/
-        if self is LoginViewController {
-            let topedgeofkeyboard = ( self.view.frame.height ) - (keyboardSize.CGRectValue().height)
-            for uiStackViewSubview in self.view.subviews {
-                guard uiStackViewSubview is UIStackView else { continue }
-                var countUITextfields = 0
-                for stackcell in uiStackViewSubview.subviews {
-                    guard stackcell is UITextField else { continue }
-                    countUITextfields += 1
-                    guard countUITextfields == 2 else { continue }
-                    let bottom = stackcell.frame.maxY + uiStackViewSubview.frame.minY // bottom + stackviewoffset
-                    if ( countUITextfields == 2 ) && ( CGFloat(topedgeofkeyboard) < bottom ) {
-                        // Someparts of the textfields blocked move up by diffence from bottom
-                        let movementAmt = bottom - CGFloat(topedgeofkeyboard)
-                        return CGFloat(movementAmt)
-                    } else { // No movement necessary
-                        return CGFloat(0)
-                    }
-                }
-            }
-        }
-        // All other viewcontrollers
-        return keyboardSize.CGRectValue().height
+    func getKeyboardHeight(_ notification:Notification) -> CGFloat {
+        let keyboardSize = (notification as NSNotification).userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue// of CGRect
+        return keyboardSize.cgRectValue.height
     }
     
     // Moves the view up prior to presenting keyboard
-    func keyboardWillShow(notification: NSNotification){
+    func keyboardWillShow(_ notification: Notification){
         
         view.autoresizesSubviews = false
         // Get height of keyboard and save it globally
@@ -55,8 +31,8 @@ extension UIViewController {
         // Move the whole UIView up by the keyboard amount
         
         if myKeyboardHeight != 0 {
-            view.autoresizingMask  = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleHeight]
-            view.transform = CGAffineTransformMakeTranslation(0,-myKeyboardHeight)
+            view.autoresizingMask  = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
+            view.transform = CGAffineTransform(translationX: 0,y: -myKeyboardHeight)
         }
         // Stop responding to keyboard will SHOW notificaions
         unsubscribeFromKeyboardShowNotifications()
@@ -65,16 +41,16 @@ extension UIViewController {
     }
     
     // Moves the view down when the keyboard is dismissed
-    func keyboardWillHide(notification: NSNotification){
+    func keyboardWillHide(_ notification: Notification){
         // Move the bottomTextFiled UIView down by the keyboard amount
         if getKeyboardHeight(notification) != 0 {
             // This allows autolayout in portrait mode, to adjust the Location Textview dynamically. Otherwise the view will autosize and be the incorrect size on screen.
-            view.autoresizingMask = UIViewAutoresizing.FlexibleWidth
-            view.transform = CGAffineTransformMakeTranslation(0, 0)
+            view.autoresizingMask = UIViewAutoresizing.flexibleWidth
+            view.transform = CGAffineTransform(translationX: 0, y: 0)
 
         }
         // This restores the autosizing properties
-        view.autoresizingMask  = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleHeight]
+        view.autoresizingMask  = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
         unsubscribeFromKeyboardHideNotifications()
         subscribeToKeyboardShowNotifications()
     }
@@ -82,25 +58,25 @@ extension UIViewController {
     // Subscribes to the notification center for keyboard appearances
     func subscribeToKeyboardShowNotifications(){
         // Notify this view controller when keyboard will show
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(UIViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
     }
     
     // Subscribes to the notification center for keyboard disappearances
     func subscribeToKeyboardHideNotifications(){
         // Notify this viewcontroller when keyboard will hide
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(UIViewController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
     /// Unsubscribes to the notification center for keyboard appearnaces
     func unsubscribeFromKeyboardShowNotifications(){
         // Stop notifying this view controller when the keyboard will show
-        NSNotificationCenter.defaultCenter().removeObserver(self, name:UIKeyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name:NSNotification.Name.UIKeyboardWillShow, object: nil)
     }
     
     /// Unscubscribes to the notification center for keyboard disappearances
     func unsubscribeFromKeyboardHideNotifications(){
         // Stop notifying this view controller when the keyboard will hide
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
 }

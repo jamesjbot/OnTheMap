@@ -10,12 +10,12 @@ import Foundation
 
 class Model{
 
-     private var students: [StudentInformation]!
-     private var thisStudentInformation: StudentInformation!
+     fileprivate var students: [StudentInformation]!
+     fileprivate var thisStudentInformation: StudentInformation!
     
     // MARK: - Singleton Implementation
     
-    private init(){
+    fileprivate init(){
         students = [StudentInformation]()
         thisStudentInformation = StudentInformation()
     }
@@ -24,7 +24,7 @@ class Model{
         return thisStudentInformation
     }
     
-    func setThisStudent(input: StudentInformation) -> Bool {
+    func setThisStudent(_ input: StudentInformation) -> Bool {
         thisStudentInformation = input
         return true
     }
@@ -33,7 +33,7 @@ class Model{
         return students
     }
     
-    func setStudents(input: [StudentInformation]) -> Bool {
+    func setStudents(_ input: [StudentInformation]) -> Bool {
         students = input
         return true
     }
@@ -43,7 +43,7 @@ class Model{
         return true
     }
     
-    func appendStudent(input: StudentInformation) -> Bool {
+    func appendStudent(_ input: StudentInformation) -> Bool {
         students.append(input)
         return true
     }
@@ -73,16 +73,16 @@ struct StudentInformation {
     
     
     init( id: [ String: AnyObject ]){
-        createdAt = (id["createdAt"] ?? "") as! String
-        firstName = (id["firstName"] ?? "") as! String
-        lastName = (id["lastName"] ?? "") as! String
-        latitude = ((id["latitude"] ?? 0) as! NSNumber).description
-        longitude = ((id["longitude"] ?? 0) as! NSNumber).description
-        mapString = (id["mapString"] ?? "") as! String
-        mediaURL = (id["mediaURL"] ?? "") as! String
-        objectId = (id["objectId"] ?? "") as! String
-        uniqueKey = (id["uniqueKey"] ?? "") as! String
-        updatedAt = (id["updatedAt"] ?? "") as! String
+        createdAt = (id["createdAt"] as? String ?? "")
+        firstName = (id["firstName"] as? String ?? "")
+        lastName = (id["lastName"] as? String ?? "")
+        latitude = ((id["latitude"] as? NSNumber ?? 0)).description
+        longitude = ((id["longitude"] as? NSNumber ?? 0) ).description
+        mapString = (id["mapString"] as? String ?? "")
+        mediaURL = (id["mediaURL"] as? String ?? "")
+        objectId = (id["objectId"] as? String ?? "")
+        uniqueKey = (id["uniqueKey"] as? String ?? "")
+        updatedAt = (id["updatedAt"] as? String ?? "")
     }
 
     init(){

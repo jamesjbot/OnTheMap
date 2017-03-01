@@ -42,40 +42,40 @@ extension UIViewController {
     
     // Callback action to perform segue to Login screen if successful.
     func unwindToLoginInitiation(){
-        self.performSegueWithIdentifier("unwindToLoginSegueID", sender: self)
+        self.performSegue(withIdentifier: "unwindToLoginSegueID", sender: self)
     }
     
     
     // MARK: Specialized alert displays for UIViewControllers
-    func displayAlertWindow(title: String, msg: String, actions: [UIAlertAction]){
+    func displayAlertWindow(_ title: String, msg: String, actions: [UIAlertAction]){
         performUIUpdatesOnMain() { () -> Void in
-            let alertWindow: UIAlertController = UIAlertController(title: title, message: msg, preferredStyle: UIAlertControllerStyle.Alert)
+            let alertWindow: UIAlertController = UIAlertController(title: title, message: msg, preferredStyle: UIAlertControllerStyle.alert)
             for action in actions {
                 alertWindow.addAction(action)
             }
-            self.presentViewController(alertWindow, animated: true, completion: nil)
+            self.present(alertWindow, animated: true, completion: nil)
         }
     }
     
     
     func dismissAction()-> UIAlertAction {
-        return UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil)
+        return UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: nil)
     }
     
     
-    func checkStudentPostingStatusAndShowPostingScreen(completionHandlerCheckStudentPosting: (success: Bool, present: Bool?, error: NSError?)-> Void) {
+    func checkStudentPostingStatusAndShowPostingScreen(_ completionHandlerCheckStudentPosting: @escaping (_ success: Bool, _ present: Bool?, _ error: NSError?)-> Void) {
         ParseClient.sharedInstance().getThisStudentLocation(Model.sharedInstance().getThisStudent().uniqueKey, completionHandlerForGetThisStudentLocation: completionHandlerCheckStudentPosting)
     }
     
     
-    func openURL(personURL: String){
-        let app = UIApplication.sharedApplication()
+    func openURL(_ personURL: String){
+        let app = UIApplication.shared
         let url: String = (personURL)
-        let targetURL: NSURL! = NSURL(string: url)
+        let targetURL: URL! = URL(string: url)
         if targetURL != nil && app.canOpenURL(targetURL) {
             app.openURL(targetURL)
         } else {
-            displayAlertWindow("", msg: "Invalid Link", actions: [UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Cancel, handler: nil)])
+            displayAlertWindow("", msg: "Invalid Link", actions: [UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.cancel, handler: nil)])
         }
     }
     

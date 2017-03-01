@@ -29,33 +29,33 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
     // MARK: - IBActions
     
     // Target of Logout Unwinding
-    @IBAction func unwindToLoginReceiver(segue:UIStoryboardSegue){
+    @IBAction func unwindToLoginReceiver(_ segue:UIStoryboardSegue){
     }
     
     
     // Responds to presses on login button
-    @IBAction func attempToLogin(sender: AnyObject) {
+    @IBAction func attempToLogin(_ sender: AnyObject) {
         myActivityIndicator.startAnimating()
-        if FBSDKAccessToken.currentAccessToken() == nil {
+        if FBSDKAccessToken.current() == nil {
             udacityClient.loginToUdacity(usernameTextField.text!, password: passwordTextField.text!,completionHandlerForLogin: loginToMapViewClosure)
         } else {
-            udacityClient.loginToUdacityWithFacebook(FBSDKAccessToken.currentAccessToken().tokenString, completionHandlerForLogin: loginToMapViewClosure)
+            udacityClient.loginToUdacityWithFacebook(FBSDKAccessToken.current().tokenString, completionHandlerForLogin: loginToMapViewClosure)
         }
         
     }
     
-    @IBAction func signUp2Udacity(sender: AnyObject) {
+    @IBAction func signUp2Udacity(_ sender: AnyObject) {
         let url = udacitySignUpURL
         openURL(url)
     }
     
     // MARK: - Closure Expressions
     
-    func loginToMapViewClosure(success: Bool?,error: NSError?) -> Void {
+    func loginToMapViewClosure(_ success: Bool?,error: NSError?) -> Void {
         self.stopAnimating()
         if success == true {
             performUIUpdatesOnMain {
-                self.performSegueWithIdentifier("LoginToMap", sender: self)
+                self.performSegue(withIdentifier: "LoginToMap", sender: self)
             }
         } else { // There is an error
             self.displayAlertWindow("Login Error", msg: "Error logging in\nPlease try again" , actions: [self.dismissAction()])
@@ -76,7 +76,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
         usernameTextField.delegate = self
         passwordTextField.delegate = self
         // Increase the size of Spinner
-        myActivityIndicator.transform = CGAffineTransformMakeScale(5, 5)
+        myActivityIndicator.transform = CGAffineTransform(scaleX: 5, y: 5)
         subscribeToKeyboardShowNotifications()
         
         // Add facebook loginbutton relationships
@@ -85,14 +85,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
 
     }
     
-    override func viewWillAppear(b: Bool){
+    override func viewWillAppear(_ b: Bool){
         super.viewWillAppear(b)
     }
     
     // MARK: - UITextField Delegate methods
     
     // Return button enabled on soft keyboard to dismiss the keyboard
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
     }
@@ -105,10 +105,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
     @param result The results of the login
     @param error The error (if any) from the login
     */
-    internal func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!){
+    internal func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!){
         if error == nil && !result.isCancelled {
             myActivityIndicator.startAnimating()
-            udacityClient.loginToUdacityWithFacebook(FBSDKAccessToken.currentAccessToken().tokenString, completionHandlerForLogin: loginToMapViewClosure)
+            udacityClient.loginToUdacityWithFacebook(FBSDKAccessToken.current().tokenString, completionHandlerForLogin: loginToMapViewClosure)
         } else {
             result.isCancelled ?
                 self.displayAlertWindow("Login Error", msg: "Cancelled Facebook Login,\n Supply Udacity Credentials" , actions: [self.dismissAction()])
@@ -121,7 +121,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
     @abstract Sent to the delegate when the button was used to logout.
     @param loginButton The button that was clicked.
     */
-    internal func loginButtonDidLogOut(loginButton: FBSDKLoginButton!){
+    internal func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!){
         FBSDKLoginManager().logOut()
     }
     

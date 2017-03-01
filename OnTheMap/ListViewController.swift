@@ -28,10 +28,10 @@ class ListViewController: UIViewController, UINavigationBarDelegate, UITableView
     // MARK: - IBActions
     
     // This is the target of unwinds to map annotation displays
-    @IBAction func unwindToAnnotationDisplayReceiver(segue: UIStoryboardSegue){
+    @IBAction func unwindToAnnotationDisplayReceiver(_ segue: UIStoryboardSegue){
     }
     
-    @IBAction func refreshStudents(sender: AnyObject) {
+    @IBAction func refreshStudents(_ sender: AnyObject) {
         myActivityIndicator.startAnimating()
         parseClient.getAllStudentLocationsAndRefreshView(){
             (success, error) -> Void in
@@ -46,26 +46,26 @@ class ListViewController: UIViewController, UINavigationBarDelegate, UITableView
         }
     }
     
-    @IBAction func informationPosting(sender: AnyObject) {
+    @IBAction func informationPosting(_ sender: AnyObject) {
         myActivityIndicator.startAnimating()
         checkStudentPostingStatusAndShowPostingScreen(){
             (success, present, error) -> Void in
             self.stopAnimating()
-            if (success && present!.boolValue == true ){
-                let action1 = UIAlertAction(title: "Overwrite", style: UIAlertActionStyle.Destructive)
-                    { (UIAlertAction) in self.performSegueWithIdentifier("moveToInformationPosting", sender: nil)}
-                let action2 = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil)
+            if (success && present! == true ){
+                let action1 = UIAlertAction(title: "Overwrite", style: UIAlertActionStyle.destructive)
+                    { (UIAlertAction) in self.performSegue(withIdentifier: "moveToInformationPosting", sender: nil)}
+                let action2 = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: nil)
                 self.displayAlertWindow("Post/Update Alert", msg: "You have already posted a student location. Would you like to overwrite your current location", actions: [action1,action2])
             } else if (error != nil){
                 self.displayAlertWindow("Information Posting", msg: (error?.localizedDescription)!, actions: [self.dismissAction()])
-            } else if (success && !(present?.boolValue == true)){
+            } else if (success && !(present == true)){
                 //completionHandlerCheckStudentPosting(displayOverwriteWarning: false, error: nil)
-                self.performSegueWithIdentifier("moveToInformationPosting", sender: nil)
+                self.performSegue(withIdentifier: "moveToInformationPosting", sender: nil)
             }
         }
     }
     
-    @IBAction func logout(sender: UIBarButtonItem) {
+    @IBAction func logout(_ sender: UIBarButtonItem) {
         myActivityIndicator.startAnimating()
         logoutAsynchronously()
     }
@@ -79,10 +79,10 @@ class ListViewController: UIViewController, UINavigationBarDelegate, UITableView
         myTableView.dataSource = self
         myTableView.delegate = self
         // Increase the size of Spinner
-        myActivityIndicator.transform = CGAffineTransformMakeScale(5, 5)
+        myActivityIndicator.transform = CGAffineTransform(scaleX: 5, y: 5)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         myActivityIndicator.startAnimating()
         parseClient.getAllStudentLocationsAndRefreshView(){
@@ -106,7 +106,7 @@ class ListViewController: UIViewController, UINavigationBarDelegate, UITableView
     
     
     // MARK: - Function to help stop animating on completionHandlers
-    private func stopAnimating(){
+    fileprivate func stopAnimating(){
         performUIUpdatesOnMain(){()-> Void in
             self.myActivityIndicator.stopAnimating()
         }
@@ -115,21 +115,21 @@ class ListViewController: UIViewController, UINavigationBarDelegate, UITableView
     
     // MARK:  Table view data source
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return locations.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
-        let cell = tableView.dequeueReusableCellWithIdentifier("mytableviewcell") as! MyTableViewCell?
-        let student : StudentInformation = locations[indexPath.row]
-        let firstname = student.firstName
-        let lastname = student.lastName
-        let mapstring = student.mapString
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
+        let cell = tableView.dequeueReusableCell(withIdentifier: "mytableviewcell") as! MyTableViewCell?
+        let student : StudentInformation = locations[(indexPath as NSIndexPath).row]
+        let firstname = student.firstName ?? ""
+        let lastname = student.lastName ?? ""
+        let mapstring = student.mapString ?? ""
         
         // Setting the cell properties
         // Set the name and image
-        cell?.personName.text = "\(indexPath.row+1). \(firstname) \(lastname) at \(mapstring)"
+        cell?.personName.text = "\((indexPath as NSIndexPath).row+1). \(firstname) \(lastname) at \(mapstring)"
         let myPinImage = UIImage.init(named: "pin")
         let imageView = UIImageView(image: myPinImage )
         cell?.cellPinImage.image = imageView.image
@@ -137,11 +137,11 @@ class ListViewController: UIViewController, UINavigationBarDelegate, UITableView
         return cell!
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let alocation : StudentInformation = locations[indexPath.row]
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let alocation : StudentInformation = locations[(indexPath as NSIndexPath).row]
         let personURL: String = alocation.mediaURL
         // Unselect entry on table
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
         openURL(personURL)
     }
 
