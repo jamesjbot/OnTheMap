@@ -15,7 +15,6 @@ extension ParseClient{
         static let ApplicationID: String = "QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr"
         static let RestAPIKey: String = "QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY"
         static let ReturnToAnnotationDisplay: String = "ReturnToAnnotationDisplayID"
-        //static let URL: String = "https://api.parse.com/1/classes"
         static let URL: String = "https://parse.udacity.com/parse/classes"
     }
 
