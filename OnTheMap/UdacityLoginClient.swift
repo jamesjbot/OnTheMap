@@ -6,6 +6,14 @@
 //  Copyright © 2016 James Jongs. All rights reserved.
 //
 
+/*
+ This class interfaces with Udacity login to generate a unique userid and login
+ to the whole application
+
+ The uniqueKey that is returned from logging into Udacity is userid and we save 
+ it in the model of the student user
+ */
+
 import Foundation
 import UIKit
 
@@ -29,9 +37,6 @@ class UdacityLoginClient {
         request.httpBody = "{\"udacity\": {\"username\": \"\(username)\", \"password\": \"\(password)\"}}".data(using: String.Encoding.utf8)
         let session = URLSession.shared
         let req = request as URLRequest
-//        let t = session.dataTask(with: req) {
-//            (data,resp,err) -> Void in
-//        }
         let task = session.dataTask(with: req as URLRequest) {
             (data: Data?, response: URLResponse?, error: Error?) -> Void in
             self.guardChecks(data,response: response, error: error as NSError?) {

@@ -87,7 +87,7 @@ class ParseClient {
                             for dictionary in self.parseLocations{ // Save the user information seperately
                                 Model.sharedInstance().appendStudent(StudentInformation(id: dictionary))
                                 if (dictionary["uniqueKey"] as? String ?? "") == Model.sharedInstance().getThisStudent().uniqueKey {
-                                    // First and last name were populated when I logged into udacity
+                                    // First and last name were populated when we logged into udacity
                                     var localStudentInfo = Model.sharedInstance().getThisStudent()
                                     localStudentInfo?.latitude = dictionary["latitude"]?.description
                                     localStudentInfo?.longitude = dictionary["longitude"]?.description
@@ -110,8 +110,8 @@ class ParseClient {
         })  // end oftask
         task.resume()
     }
-    
-    // Posting student information to server
+  
+    // Posting New Student information to server
     func postThisStudentLocation(_ student: StudentInformation, completionHandlerForPost: @escaping (_ success: Bool, _ error: NSError?) -> Void ) {
         var request = NSMutableURLRequest(url: URL(string: "\(Constants.URL)/StudentLocation")!)
         request.httpMethod = "POST"
@@ -125,8 +125,20 @@ class ParseClient {
                     self.parseResult(data) {
                         (dict, error) -> Void in
                         if error == nil {
-                            let newCreationTime = dict!["createdAt"] as! String
-                            self.updatedOurStudentInforamtionUpdatedAtTime(student, updateTime: newCreationTime)
+                            guard let newObjectId = dict?["objectId"] as! String?,
+                                let newCreationTime = dict?["createdAt"] as! String? else {
+                                    let domain = "com.jamesjongs.onthemap.ErrorDomain"
+                                    let code: Int = 256
+                                    let userInfo: [AnyHashable:Any] = [NSLocalizedDescriptionKey: "Error posting new student"]
+                                    let error = NSError(domain: domain, code: code, userInfo:
+                                        userInfo)
+                                    completionHandlerForPost(false, NSError(domain: domain, code: code, userInfo: userInfo))
+                                    return
+                            }
+                            // Set the new ObjectId for the student.
+                            var mutableStudent = student
+                            mutableStudent.objectId = newObjectId
+                            self.updatedOurStudentInforamtionUpdatedAtTime(mutableStudent, updateTime: newCreationTime)
                             completionHandlerForPost(true, nil)
                         } else {
                             completionHandlerForPost(false, error)
@@ -138,7 +150,6 @@ class ParseClient {
             }
         }) 
         task.resume()
-        
     }
     
     // Update this student's location information
