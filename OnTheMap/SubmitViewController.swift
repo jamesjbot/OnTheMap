@@ -43,8 +43,10 @@ class SubmitViewController: UIViewController, MKMapViewDelegate, UITextFieldDele
         passableStudentInformation.mapString = locationString
         
         // Decide to post or update this student's information
-        if Model.sharedInstance().getThisStudent().objectId != nil {
-            parseClient.updateThisStudentLocation(passableStudentInformation){
+        // If we have an objectId it means we already have placed this student on the map
+        let weHaveStudentLocation: Bool = Model.sharedInstance().getThisStudent().objectId != nil
+        if weHaveStudentLocation {
+        parseClient.updateThisStudentLocation(passableStudentInformation){
                 (success, error) -> Void in
                 self.stopAnimating()
                 if success {
