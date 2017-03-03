@@ -110,7 +110,7 @@ class ParseClient {
         })  // end oftask
         task.resume()
     }
-
+  
     // Posting New Student information to server
     func postThisStudentLocation(_ student: StudentInformation, completionHandlerForPost: @escaping (_ success: Bool, _ error: NSError?) -> Void ) {
         var request = NSMutableURLRequest(url: URL(string: "\(Constants.URL)/StudentLocation")!)
