@@ -117,7 +117,7 @@ class ParseClient {
         request.httpMethod = "POST"
         request = formatRequest(request, student: student)
         let session = URLSession.shared
-        let task = session.dataTask(with: newRequest as URLRequest, completionHandler: {
+        let task = session.dataTask(with: request as URLRequest, completionHandler: {
             (data: Data?, response: URLResponse?, error: Error?) -> Void in
             self.guardChecks(data, response: response, error: error as NSError?){
                 (requestSuccess, error) -> Void in
