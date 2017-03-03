@@ -19,11 +19,12 @@ class ParseClient {
     
     // MARK: Convenience functions to help create url requests
     
-    func formatRequest(_ request: NSMutableURLRequest, student: StudentInformation){
+    func formatRequest( _ request: NSMutableURLRequest, student: StudentInformation) -> NSMutableURLRequest {
         formatRequestHeaders(request)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        let bodyString: String = "{\"uniqueKey\": \"\(student.uniqueKey)\", \"firstName\": \"\(student.firstName)\", \"lastName\": \"\(student.lastName)\",\"mapString\": \"\(student.mapString)\", \"mediaURL\": \"\(student.mediaURL)\",\"latitude\": \(student.latitude), \"longitude\": \(student.longitude)}"
+        let bodyString: String = "{\"uniqueKey\": \"\(student.uniqueKey!)\", \"firstName\": \"\(student.firstName!)\", \"lastName\": \"\(student.lastName!)\",\"mapString\": \"\(student.mapString!)\", \"mediaURL\": \"\(student.mediaURL!)\",\"latitude\": \(student.latitude!), \"longitude\": \(student.longitude!)}"
         request.httpBody = bodyString.data(using: String.Encoding.utf8)
+        return request
     }
     
     func formatRequestHeaders(_ request: NSMutableURLRequest){
@@ -111,12 +112,12 @@ class ParseClient {
     }
     
     // Posting student information to server
-    func postThisStudentLocation(_ student: StudentInformation, completionHandlerForPost: @escaping (_ success: Bool, _ error: NSError?) ->Void ) {
-        let request = NSMutableURLRequest(url: URL(string: "\(Constants.URL)/StudentLocation")!)
+    func postThisStudentLocation(_ student: StudentInformation, completionHandlerForPost: @escaping (_ success: Bool, _ error: NSError?) -> Void ) {
+        var request = NSMutableURLRequest(url: URL(string: "\(Constants.URL)/StudentLocation")!)
         request.httpMethod = "POST"
-        formatRequest(request, student: student)
+        request = formatRequest(request, student: student)
         let session = URLSession.shared
-        let task = session.dataTask(with: request as URLRequest, completionHandler: {
+        let task = session.dataTask(with: newRequest as URLRequest, completionHandler: {
             (data: Data?, response: URLResponse?, error: Error?) -> Void in
             self.guardChecks(data, response: response, error: error as NSError?){
                 (requestSuccess, error) -> Void in
@@ -142,11 +143,11 @@ class ParseClient {
     
     // Update this student's location information
     func updateThisStudentLocation(_ student: StudentInformation, completionHandlerForUpdate: @escaping (_ success: Bool, _ error: NSError?) -> Void) {
-        let urlString = "\(Constants.URL)/StudentLocation/\(Model.sharedInstance().getThisStudent().objectId)"
+        let urlString = "\(Constants.URL)/StudentLocation/\(Model.sharedInstance().getThisStudent().objectId!)"
         let url = URL(string: urlString)
-        let request = NSMutableURLRequest(url: url!)
+        var request = NSMutableURLRequest(url: url!)
         request.httpMethod = "PUT"
-        formatRequest(request,student: student)
+        request = formatRequest(request,student: student)
         let session = URLSession.shared
         let task = session.dataTask(with: request as URLRequest, completionHandler: {
             (data: Data?, response: URLResponse?, error: Error?) -> Void in
