@@ -1,8 +1,8 @@
 # On The Map
-Is an app that allows you to register you current position and a link to any online resource you would like to show
+Is an app that allows you to register your current position and a link to any online resource you would like to show
 
 ## Overview
-This app tell other people where you are doing an activity and a link to a URL you supply.
+This app tells other people where you are doing an activity and allows you to link a website to that location.
 
 ## Technologies Used
    
@@ -11,13 +11,18 @@ This app tell other people where you are doing an activity and a link to a URL y
 ## Example usage
 Download the app, and run in Xcode simulator
 
-   Login with Facebook.  
-   Click on a pin to see someone's location.  
+* Login  
+   Login with Facebook or if you have a Udacity account login with those credentials.
+* Seeing a person's location and their linked site.  
+   Click on a pin to see someone's location  
    Click on on the annotation that pops up to go to the displayed website address.  
-   Click list at the bottom to view all the pins as a list.  
-   Click the blue pin circle arrow to fresh your listings.  
-   Click the blue pin icon to set you location and URL.  
-   When you update your location a popup will ask if you want to overwrite your location; select Overwrite  
+   Click list at the bottom to view all the pins as a list. 
+* Refresh all listed pins and locations  
+   Click the refresh circle arrow to fresh your listings.  
+* Setting your own location  
+   Click the blue pin icon to set your location and URL.  
+   When you update (rather than initially post) your location a popup will ask if you want to overwrite your location;
+   select Overwrite  
    Type in the name of a location.  
    Press the Find on the Map button.  
    Type in the name of your URL.  
